@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sk.pds.semestralka.mapper.CarMapper">
+    <resultMap id="CarResultMap" type="sk.pds.semestralka.model.Car">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="color" property="color" />
+    </resultMap>
+
+    <select id="findAll" resultMap="CarResultMap">
+        select id, name, color from car
+    </select>
+</mapper>
