@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="sk.pds.semestralka.mapper.CarMapper">
     <resultMap id="CarResultMap" type="sk.pds.semestralka.model.Car">
-        <id column="id" property="id" />
+        <id column="car_id" property="id" />
         <result column="name" property="name" />
         <result column="type" property="type" />
         <result column="fuel_type" property="fuelType" />
@@ -10,23 +10,23 @@
     </resultMap>
 
     <select id="findAll" resultMap="CarResultMap">
-        SELECT id, name, type, fuel_type, consumption FROM car
+        SELECT car_id, name, type, fuel_type, consumption FROM car
     </select>
 
     <select id="findById" parameterType="java.lang.Long" resultMap="CarResultMap">
-        SELECT id, name, type, fuel_type, consumption FROM car WHERE id = #{carId}
+        SELECT car_id, name, type, fuel_type, consumption FROM car WHERE id = #{carId}
     </select>
 
     <select id="findByName" parameterType="java.lang.String" resultMap="CarResultMap">
-        SELECT id, name, type, fuel_type, consumption FROM car WHERE upper(name) like upper(#{carName})
+        SELECT car_id, name, type, fuel_type, consumption FROM car WHERE upper(name) like upper(#{carName})
     </select>
 
     <select id="findByType" parameterType="java.lang.String" resultMap="CarResultMap">
-        SELECT id, name, type, fuel_type, consumption FROM car WHERE upper(type) like upper(#{carType})
+        SELECT car_id, name, type, fuel_type, consumption FROM car WHERE upper(type) like upper(#{carType})
     </select>
 
     <select id="findByFuelType" parameterType="java.lang.String" resultMap="CarResultMap">
-        SELECT id, name, type, fuel_type, consumption FROM car WHERE upper(fuel_type) like upper(#{carFuelType})
+        SELECT car_id, name, type, fuel_type, consumption FROM car WHERE upper(fuel_type) like upper(#{carFuelType})
     </select>
 
     <insert id="insertCar" parameterType="sk.pds.semestralka.model.Car">
