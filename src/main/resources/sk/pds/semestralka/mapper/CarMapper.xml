@@ -4,10 +4,36 @@
     <resultMap id="CarResultMap" type="sk.pds.semestralka.model.Car">
         <id column="id" property="id" />
         <result column="name" property="name" />
-        <result column="color" property="color" />
+        <result column="type" property="type" />
+        <result column="fuel_type" property="fuelType" />
+        <result column="consumption" property="consumption" />
     </resultMap>
 
     <select id="findAll" resultMap="CarResultMap">
-        select id, name, color from car
+        SELECT id, name, type, fuel_type, consumption FROM car
     </select>
+
+    <select id="findById" parameterType="java.lang.Long" resultMap="CarResultMap">
+        SELECT id, name, type, fuel_type, consumption FROM car WHERE id = #{carId}
+    </select>
+
+    <select id="findByName" parameterType="java.lang.String" resultMap="CarResultMap">
+        SELECT id, name, type, fuel_type, consumption FROM car WHERE upper(name) like upper(#{carName})
+    </select>
+
+    <select id="findByType" parameterType="java.lang.String" resultMap="CarResultMap">
+        SELECT id, name, type, fuel_type, consumption FROM car WHERE upper(type) like upper(#{carType})
+    </select>
+
+    <select id="findByFuelType" parameterType="java.lang.String" resultMap="CarResultMap">
+        SELECT id, name, type, fuel_type, consumption FROM car WHERE upper(fuel_type) like upper(#{carFuelType})
+    </select>
+
+    <insert id="insertCar" parameterType="sk.pds.semestralka.model.Car">
+        INSERT INTO car (name, type, fuel_type, consumption) VALUES (#{name}, #{type}, #{fuelType}, #{consumption})
+    </insert>
+
+    <update id="updateCar" parameterType="sk.pds.semestralka.model.Car">
+        UPDATE car SET (name, type, fuel_type, consumption) = (#{name}, #{type}, #{fuelType}, #{consumption}) WHERE car_id = #{id}
+    </update>
 </mapper>

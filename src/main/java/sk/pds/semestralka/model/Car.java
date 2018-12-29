@@ -9,14 +9,18 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private int color;
+    private String type;
+    private String fuelType;
+    private float consumption;
 
     public Car() {
     }
 
-    public Car(Long id, String name, int color) {
+    public Car(String name, String type, String fuelType, float consumption) {
         this.name = name;
-        this.color = color;
+        this.type = type;
+        this.fuelType = fuelType;
+        this.consumption = consumption;
     }
 
     public Long getId() {
@@ -35,47 +39,49 @@ public class Car {
         this.name = name;
     }
 
-    public int getColor() {
-        return color;
+    public String getType() {
+        return type;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(String fuelType) {
+        this.fuelType = fuelType;
+    }
+
+    public float getConsumption() {
+        return consumption;
+    }
+
+    public void setConsumption(float consumption) {
+        this.consumption = consumption;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Car)) return false;
+        Car car = (Car) o;
+        return Float.compare(car.getConsumption(), getConsumption()) == 0 &&
+                getId().equals(car.getId()) &&
+                getName().equals(car.getName()) &&
+                getType().equals(car.getType()) &&
+                getFuelType().equals(car.getFuelType());
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + this.color;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Car other = (Car) obj;
-        if (this.color != other.color) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return Objects.equals(this.id, other.id);
+        return Objects.hash(getId(), getName(), getType(), getFuelType(), getConsumption());
     }
 
     @Override
     public String toString() {
-        return "Car{" + "id=" + id + ", name=" + name
-                + ", color=" + color + '}';
+        return "Car{" + "id=" + id + ", name=" + name + ", type=" + type + ", fuelType=" + fuelType + ", consumption=" + consumption + '}';
     }
 }
