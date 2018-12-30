@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sk.pds.semestralka.mapper.CoordinatesMapper">
+    <resultMap id="CoordinatesResultMap" type="sk.pds.semestralka.model.Coordinates">
+        <id column="coordinates_id" property="coordinatesId" />
+        <result column="ride_id" property="rideId" />
+        <result column="latitude" property="latitude" />
+        <result column="longtitude" property="longtitude" />
+        <result column="height" property="height" />
+        <result column="time" property="time" />
+    </resultMap>
+
+    <select id="findAll" resultMap="CoordinatesResultMap">
+        SELECT coordinates_id, ride_id, latitude, longtitude, height, time FROM coordinates
+    </select>
+
+    <select id="findById" resultMap="CoordinatesResultMap" parameterType="java.lang.Long">
+        SELECT coordinates_id, ride_id, latitude, longtitude, height, time FROM coordinates WHERE coordinates_id = #{coordinatesId}
+    </select>
+
+    <select id="findByRide" resultMap="CoordinatesResultMap" parameterType="java.lang.Long">
+        SELECT coordinates_id, ride_id, latitude, longtitude, height, time FROM coordinates WHERE ride_id = #{rideId}
+    </select>
+
+    <insert id="insertCoordinates" parameterType="sk.pds.semestralka.model.Coordinates">
+        INSERT INTO coordinates (ride_id, latitude, longtitude, height, time) VALUES (#{rideId}, #{latitude}, #{longtitude}, #{height}, #{time})
+    </insert>
+
+    <update id="updateCoordinates" parameterType="sk.pds.semestralka.model.Coordinates">
+        UPDATE coordinates SET (ride_id, latitude, longtitude, height, time) = (#{rideId}, #{latitude}, #{longtitude}, #{height}, #{time}) WHERE coordinates_id = #{coordinatesId}
+    </update>
+
+    <delete id="deleteCoordinates" parameterType="java.lang.Long">
+        DELETE FROM coordinates WHERE coordinates_id = #{coordinatesId}
+    </delete>
+</mapper>

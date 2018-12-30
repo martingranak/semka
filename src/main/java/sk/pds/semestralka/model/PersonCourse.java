@@ -5,32 +5,32 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "DRIVER_COURSE")
-public class DriverCourse {
+@Table(name = "PERSON_COURSE")
+public class PersonCourse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long driverCourseId;
     private long courseId;
-    private long driverId;
+    private String identityNumber;
     private LocalDate dateFrom;
     private LocalDate dateTo;
 
-    public DriverCourse() {
+    public PersonCourse() {
     }
 
-    public DriverCourse(long courseId, long driverId, LocalDate dateFrom, LocalDate dateTo) {
+    public PersonCourse(long courseId, String identityNumber, LocalDate dateFrom, LocalDate dateTo) {
         this.courseId = courseId;
-        this.driverId = driverId;
+        this.identityNumber = identityNumber;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
     }
 
     public long getId() {
-        return id;
+        return driverCourseId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long driverCourseId) {
+        this.driverCourseId = driverCourseId;
     }
 
     public long getCourseId() {
@@ -41,12 +41,12 @@ public class DriverCourse {
         this.courseId = courseId;
     }
 
-    public long getDriverId() {
-        return driverId;
+    public String getDriverId() {
+        return identityNumber;
     }
 
-    public void setDriverId(long driverId) {
-        this.driverId = driverId;
+    public void setDriverId(String identityNumber) {
+        this.identityNumber = identityNumber;
     }
 
     public LocalDate getDateFrom() {
@@ -68,8 +68,8 @@ public class DriverCourse {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof DriverCourse)) return false;
-        DriverCourse that = (DriverCourse) o;
+        if (!(o instanceof PersonCourse)) return false;
+        PersonCourse that = (PersonCourse) o;
         return getId() == that.getId() &&
                 getCourseId() == that.getCourseId() &&
                 getDriverId() == that.getDriverId() &&
@@ -84,10 +84,10 @@ public class DriverCourse {
 
     @Override
     public String toString() {
-        return "DriverCourse{" +
-                "id=" + id +
+        return "PersonCourse{" +
+                "id=" + driverCourseId +
                 ", courseId=" + courseId +
-                ", driverId=" + driverId +
+                ", driverId=" + identityNumber +
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
                 '}';

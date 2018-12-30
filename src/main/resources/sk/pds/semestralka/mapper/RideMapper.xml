@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sk.pds.semestralka.mapper.RideMapper">
+    <resultMap id="RideResultMap" type="sk.pds.semestralka.model.Ride">
+        <id column="ride_id" property="rideId" />
+        <result column="identity_number" property="identityNumber" />
+        <result column="car_id" property="carId" />
+        <result column="datitime_from" property="" />
+        <result column="datitime_to" property="" />
+    </resultMap>
+
+    <select id="findAll" resultMap="RideResultMap">
+        SELECT ride_id, driver_id, car_id FROM ride
+    </select>
+
+    <select id="findById" parameterType="java.lang.Long"  resultMap="RideResultMap">
+        SELECT ride_id, driver_id, car_id FROM ride WHERE ride_id = #{rideId}
+    </select>
+
+    <select id="findByDriver" parameterType="java.lang.Long"  resultMap="RideResultMap">
+        SELECT ride_id, driver_id, car_id FROM ride WHERE driver_id = #{driverId}
+    </select>
+
+    <select id="findByCar" parameterType="java.lang.Long"  resultMap="RideResultMap">
+        SELECT ride_id, driver_id, car_id FROM ride WHERE car_id = #{carId}
+    </select>
+
+    <insert id="insertRide" parameterType="sk.pds.semestralka.model.Ride">
+        INSERT INTO ride (driver_id, car_id) VALUES (#{driverId}, #{carId})
+    </insert>
+
+    <update id="updateRide" parameterType="sk.pds.semestralka.model.Ride">
+        UPDATE ride SET (driver_id, car_id) = (#{driverId}, #{carId}) WHERE ride_id = #{rideId}
+    </update>
+
+    <delete id="deleteRide" parameterType="java.lang.Long">
+        DELETE FROM ride WHERE ride_id = #{rideId}
+    </delete>
+</mapper>

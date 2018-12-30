@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sk.pds.semestralka.mapper.PersonMapper">
+    <resultMap id="PersonResultMap" type="sk.pds.semestralka.model.Person">
+        <id column="identity_number" property="identityNumber"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="last_name"/>
+        <result column="birthday" property="birthday"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="PersonResultMap">
+        SELECT identity_number, first_name, last_name, birthday FROM person
+    </select>
+
+    <select id="findById" resultMap="PersonResultMap" parameterType="java.lang.String">
+        SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(identity_number) = UPPER(#{identityNumber})
+    </select>
+
+    <select id="findByName" resultMap="PersonResultMap" parameterType="java.lang.String">
+        SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(first_name || ' ' || last_name) = UPPER(#{name})
+    </select>
+
+    <select id="findByFirstName" resultMap="PersonResultMap" parameterType="java.lang.String">
+        SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(first_name) = UPPER(#{firstName})
+    </select>
+
+    <select id="findByLastName" resultMap="PersonResultMap" parameterType="java.lang.String">
+        SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(last_name) = UPPER(#{lastName})
+    </select>
+
+    <insert id="insertPerson" parameterType="sk.pds.semestralka.model.Person">
+        INSERT INTO person (identity_number, first_name, last_name, birthday) VALUES (#{identity_number}, #{first_name}, #{last_name}, #{birthday})
+    </insert>
+
+    <update id="updatePerson" parameterType="sk.pds.semestralka.model.Person">
+        UPDATE person SET (course_name, course_type) = (#{courseName}, #{courseType}) WHERE UPPER(identity_number) = UPPER(#{identityNumber})
+    </update>
+
+    <delete id="deletePerson" parameterType="java.lang.Long">
+        DELETE FROM person WHERE UPPER(identity_number) = UPPER(#{identityNumber})
+    </delete>
+</mapper>

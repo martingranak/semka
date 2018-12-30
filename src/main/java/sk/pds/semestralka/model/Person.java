@@ -3,6 +3,7 @@ package sk.pds.semestralka.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,12 +14,12 @@ public class Person {
     private String identityNumber;
     private String firstName;
     private String lastName;
-    private Date birthday;
+    private LocalDate birthday;
 
     public Person() {
     }
 
-    public Person(String identityNumber, String firstName, String lastName, Date birthday) {
+    public Person(String identityNumber, String firstName, String lastName, LocalDate birthday) {
         this.identityNumber = identityNumber;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -49,11 +50,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 

@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long carId;
     private String name;
     private String type;
     private String fuelType;
@@ -24,11 +24,11 @@ public class Car {
     }
 
     public Long getId() {
-        return id;
+        return carId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long carId) {
+        this.carId = carId;
     }
 
     public String getName() {
@@ -82,6 +82,6 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" + "id=" + id + ", name=" + name + ", type=" + type + ", fuelType=" + fuelType + ", consumption=" + consumption + '}';
+        return "Car{" + "id=" + carId + ", name=" + name + ", type=" + type + ", fuelType=" + fuelType + ", consumption=" + consumption + '}';
     }
 }

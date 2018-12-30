@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Coordinates {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long coordinatesId;
     private long rideId;
     private float latitude;
     private float longtitude;
@@ -28,11 +28,11 @@ public class Coordinates {
     }
 
     public long getId() {
-        return id;
+        return coordinatesId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long coordinatesId) {
+        this.coordinatesId = coordinatesId;
     }
 
     public long getRideId() {
@@ -96,7 +96,7 @@ public class Coordinates {
     @Override
     public String toString() {
         return "Coordinates{" +
-                "id=" + id +
+                "id=" + coordinatesId +
                 ", rideId=" + rideId +
                 ", latitude=" + latitude +
                 ", longtitude=" + longtitude +

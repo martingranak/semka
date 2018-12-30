@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import sk.pds.semestralka.mapper.CarMapper;
 import sk.pds.semestralka.model.Car;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -33,11 +34,20 @@ public class CarService {
         return this.carMapper.findByFuelType(carFuelType);
     }
 
-    public void addCar(String carName, String carType, String carFuelType, float carConsumption) {
-        this.carMapper.insertCar(new Car(carName, carType, carFuelType, carConsumption));
+    @Transactional
+    public Car addCar(String carName, String carType, String carFuelType, float carConsumption) {
+        Car car = new Car(carName, carType, carFuelType, carConsumption);
+        this.carMapper.insertCar(car);
+        return car;
     }
 
-    public void updateCar(long carId, Car car) {
-        this.carMapper.updateCar(carId, car);
+    @Transactional
+    public void updateCar(Car car) {
+        this.carMapper.updateCar(car);
+    }
+
+    @Transactional
+    public void removeCar(long carId) {
+        this.carMapper.deleteCar(carId);
     }
 }

@@ -36,4 +36,8 @@
     <update id="updateCar" parameterType="sk.pds.semestralka.model.Car">
         UPDATE car SET (name, type, fuel_type, consumption) = (#{name}, #{type}, #{fuelType}, #{consumption}) WHERE car_id = #{id}
     </update>
+
+    <delete id="deleteCar" parameterType="java.lang.Long">
+        DELETE FROM car WHERE car_id = #{carId}
+    </delete>
 </mapper>

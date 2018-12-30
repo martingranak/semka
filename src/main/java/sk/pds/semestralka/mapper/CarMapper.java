@@ -14,5 +14,6 @@ public interface CarMapper {
     List<Car> findByType(@Param("carType") String carType);
     List<Car> findByFuelType(@Param("carFuelType") String carFuelType);
     void insertCar(@Param("car") Car car);
-    void updateCar(@Param("carId") long carId, @Param("car") Car car);
+    void updateCar(@Param("car") Car car);
+    void deleteCar(@Param("carId") long carId);
 }

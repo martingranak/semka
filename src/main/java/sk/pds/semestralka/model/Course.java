@@ -8,40 +8,40 @@ import java.util.Objects;
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    private String name;
-    private String type;
+    private int courseId;
+    private String courseName;
+    private String courseType;
 
     public Course() {
     }
 
-    public Course(String name, String type) {
-        this.name = name;
-        this.type = type;
+    public Course(String courseName, String courseType) {
+        this.courseName = courseName;
+        this.courseType = courseType;
     }
 
     public int getId() {
-        return id;
+        return courseId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int courseId) {
+        this.courseId = courseId;
     }
 
     public String getName() {
-        return name;
+        return courseName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getType() {
-        return type;
+        return courseType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(String courseType) {
+        this.courseType = courseType;
     }
 
     @Override
@@ -62,9 +62,9 @@ public class Course {
     @Override
     public String toString() {
         return "Course{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
+                "id=" + courseId +
+                ", courseName='" + courseName + '\'' +
+                ", courseType='" + courseType + '\'' +
                 '}';
     }
 }

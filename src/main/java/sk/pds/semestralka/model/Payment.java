@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long paymentId;
     private long rideId;
     private float value;
     private String description;
@@ -23,11 +23,11 @@ public class Payment {
     }
 
     public long getId() {
-        return id;
+        return paymentId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long paymentId) {
+        this.paymentId = paymentId;
     }
 
     public long getRideId() {
@@ -73,7 +73,7 @@ public class Payment {
     @Override
     public String toString() {
         return "Payment{" +
-                "id=" + id +
+                "id=" + paymentId +
                 ", rideId=" + rideId +
                 ", value=" + value +
                 ", description='" + description + '\'' +

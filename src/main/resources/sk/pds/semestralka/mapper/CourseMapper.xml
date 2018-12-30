@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sk.pds.semestralka.mapper.CourseMapper">
+    <resultMap id="CourseResultMap" type="sk.pds.semestralka.model.Course">
+        <id column="course_id" property="courseId"/>
+        <result column="course_name" property="courseName"/>
+        <result column="course_type" property="courseType"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="CourseResultMap">
+        SELECT course_id, course_name, course_type FROM course
+    </select>
+
+    <select id="findById" resultMap="CourseResultMap" parameterType="java.lang.Long">
+        SELECT course_id, course_name, course_type FROM course WHERE course_id = #{courseId}
+    </select>
+
+    <select id="findByName" resultMap="CourseResultMap" parameterType="java.lang.String">
+        SELECT course_id, course_name, course_type FROM course WHERE UPPER(course_name) = UPPER(#{courseName})
+    </select>
+
+    <insert id="insertCourse" parameterType="sk.pds.semestralka.model.Course">
+        INSERT INTO course (course_name, course_type) VALUES (#{courseName}, #{courseType})
+    </insert>
+
+    <update id="updateCourse" parameterType="sk.pds.semestralka.model.Course">
+        UPDATE course SET (course_name, course_type) = (#{courseName}, #{courseType}) WHERE course_id = #{courseId}
+    </update>
+
+    <delete id="deleteCourse" parameterType="java.lang.Long">
+        DELETE FROM course WHERE course_id = #{courseId}
+    </delete>
+</mapper>
