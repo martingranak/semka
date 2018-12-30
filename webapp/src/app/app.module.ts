@@ -11,6 +11,8 @@ import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolb
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 
+import { AgmCoreModule } from "@agm/core";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,10 @@ import { HttpClientModule } from "@angular/common/http";
     MatCardModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAcATQVmZqd3v9C-GA5j6mdYYCfalSxmKM'
+    })
   ],
   providers: [CarService],
   bootstrap: [AppComponent]
