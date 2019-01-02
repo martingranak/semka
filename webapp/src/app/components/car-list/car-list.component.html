@@ -1,0 +1,17 @@
+<h2>Car List</h2>
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>name</th> 
+    <th>type</th>
+    <th>fuel type</th>
+    <th>consumption</th>
+  </tr>
+  <tr *ngFor="let car of cars">
+    <td>{{ car.id }}</td>
+    <td>{{ car.name }}</td>
+    <td>{{ car.type }}</td>
+    <td>{{ car.fuelType }}</td>
+    <td>{{ car.consumption }}</td>
+  </tr>
+</table>
