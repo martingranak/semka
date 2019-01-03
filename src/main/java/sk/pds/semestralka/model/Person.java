@@ -7,10 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
-@Entity
-@Table(name = "PERSON")
 public class Person {
-    @Id
     private String identityNumber;
     private String firstName;
     private String lastName;

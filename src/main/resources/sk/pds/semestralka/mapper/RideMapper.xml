@@ -5,35 +5,35 @@
         <id column="ride_id" property="rideId" />
         <result column="identity_number" property="identityNumber" />
         <result column="car_id" property="carId" />
-        <result column="datitime_from" property="" />
-        <result column="datitime_to" property="" />
+        <result column="datitime_from" property="datetimeFrom" />
+        <result column="datitime_to" property="datetimeTo" />
     </resultMap>
 
     <select id="findAll" resultMap="RideResultMap">
-        SELECT ride_id, driver_id, car_id FROM ride
+        SELECT ride_id, driver_id, car_id FROM ride_tab
     </select>
 
     <select id="findById" parameterType="java.lang.Long"  resultMap="RideResultMap">
-        SELECT ride_id, driver_id, car_id FROM ride WHERE ride_id = #{rideId}
+        SELECT ride_id, driver_id, car_id FROM ride_tab WHERE ride_id = #{rideId}
     </select>
 
     <select id="findByDriver" parameterType="java.lang.Long"  resultMap="RideResultMap">
-        SELECT ride_id, driver_id, car_id FROM ride WHERE driver_id = #{driverId}
+        SELECT ride_id, driver_id, car_id FROM ride_tab WHERE driver_id = #{driverId}
     </select>
 
     <select id="findByCar" parameterType="java.lang.Long"  resultMap="RideResultMap">
-        SELECT ride_id, driver_id, car_id FROM ride WHERE car_id = #{carId}
+        SELECT ride_id, driver_id, car_id FROM ride_tab WHERE car_id = #{carId}
     </select>
 
     <insert id="insertRide" parameterType="sk.pds.semestralka.model.Ride">
-        INSERT INTO ride (driver_id, car_id) VALUES (#{driverId}, #{carId})
+        INSERT INTO ride_tab (driver_id, car_id) VALUES (#{driverId}, #{carId})
     </insert>
 
     <update id="updateRide" parameterType="sk.pds.semestralka.model.Ride">
-        UPDATE ride SET (driver_id, car_id) = (#{driverId}, #{carId}) WHERE ride_id = #{rideId}
+        UPDATE ride_tab SET (driver_id, car_id) = (#{driverId}, #{carId}) WHERE ride_id = #{rideId}
     </update>
 
     <delete id="deleteRide" parameterType="java.lang.Long">
-        DELETE FROM ride WHERE ride_id = #{rideId}
+        DELETE FROM ride_tab WHERE ride_id = #{rideId}
     </delete>
 </mapper>

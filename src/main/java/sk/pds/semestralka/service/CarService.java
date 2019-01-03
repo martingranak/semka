@@ -35,8 +35,8 @@ public class CarService {
     }
 
     @Transactional
-    public Car addCar(String carName, String carType, String carFuelType, float carConsumption) {
-        Car car = new Car(carName, carType, carFuelType, carConsumption);
+    public Car addCar(String carName, String carType, String carFuelType, float carConsumption, String picture) {
+        Car car = new Car(carName, carType, carFuelType, carConsumption, picture.getBytes());
         this.carMapper.insertCar(car);
         return car;
     }

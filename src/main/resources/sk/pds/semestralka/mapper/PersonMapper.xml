@@ -4,7 +4,7 @@
     <resultMap id="PersonResultMap" type="sk.pds.semestralka.model.Person">
         <id column="identity_number" property="identityNumber"/>
         <result column="first_name" property="firstName"/>
-        <result column="last_name" property="last_name"/>
+        <result column="last_name" property="lastName"/>
         <result column="birthday" property="birthday"/>
     </resultMap>
 

@@ -3,11 +3,7 @@ package sk.pds.semestralka.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "COURSE")
 public class Course {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int courseId;
     private String courseName;
     private String courseType;

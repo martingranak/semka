@@ -1,26 +1,30 @@
 package sk.pds.semestralka.model;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "CAR")
 public class Car {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long carId;
     private String name;
     private String type;
-    private String fuelType;
+    private String fuel;
     private float consumption;
+    @Lob
+    @Column(name="picture")
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] picture;
+    private String pictureString;
 
     public Car() {
     }
 
-    public Car(String name, String type, String fuelType, float consumption) {
+    public Car(String name, String type, String fuel, float consumption, byte[] picture) {
         this.name = name;
         this.type = type;
-        this.fuelType = fuelType;
+        this.fuel = fuel;
         this.consumption = consumption;
+        this.picture = picture;
     }
 
     public Long getId() {
@@ -47,12 +51,12 @@ public class Car {
         this.type = type;
     }
 
-    public String getFuelType() {
-        return fuelType;
+    public String getFuel() {
+        return fuel;
     }
 
-    public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
+    public void setFuel(String fuel) {
+        this.fuel = fuel;
     }
 
     public float getConsumption() {
@@ -61,6 +65,22 @@ public class Car {
 
     public void setConsumption(float consumption) {
         this.consumption = consumption;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
+    }
+
+    public String getPictureString() {
+        return pictureString;
+    }
+
+    public void setPictureString(String pictureString) {
+        this.pictureString = pictureString;
     }
 
     @Override
@@ -72,16 +92,16 @@ public class Car {
                 getId().equals(car.getId()) &&
                 getName().equals(car.getName()) &&
                 getType().equals(car.getType()) &&
-                getFuelType().equals(car.getFuelType());
+                getFuel().equals(car.getFuel());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getType(), getFuelType(), getConsumption());
+        return Objects.hash(getId(), getName(), getType(), getFuel(), getConsumption());
     }
 
     @Override
     public String toString() {
-        return "Car{" + "id=" + carId + ", name=" + name + ", type=" + type + ", fuelType=" + fuelType + ", consumption=" + consumption + '}';
+        return "Car{" + "id=" + carId + ", name=" + name + ", type=" + type + ", fuel=" + fuel + ", consumption=" + consumption + '}';
     }
 }

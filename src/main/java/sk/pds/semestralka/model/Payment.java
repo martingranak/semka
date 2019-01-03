@@ -3,11 +3,7 @@ package sk.pds.semestralka.model;
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Table(name = "PAYMENT")
 public class Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long paymentId;
     private long rideId;
     private float value;

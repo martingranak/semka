@@ -6,12 +6,14 @@
     <th>type</th>
     <th>fuel type</th>
     <th>consumption</th>
+    <th>picture</th>
   </tr>
   <tr *ngFor="let car of cars">
     <td>{{ car.id }}</td>
     <td>{{ car.name }}</td>
     <td>{{ car.type }}</td>
-    <td>{{ car.fuelType }}</td>
+    <td>{{ car.fuel }}</td>
     <td>{{ car.consumption }}</td>
+    <td><img src="data:image/png;base64,{{car.picture}}" alt="" width="400px" /></td>
   </tr>
 </table>

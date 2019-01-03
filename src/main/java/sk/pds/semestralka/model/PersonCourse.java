@@ -4,11 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
-@Table(name = "PERSON_COURSE")
 public class PersonCourse {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long driverCourseId;
     private long courseId;
     private String identityNumber;
