@@ -19,6 +19,9 @@
     <select id="findByRide" resultMap="PaymentResultMap" parameterType="java.lang.Long">
         SELECT payment_id, ride_id, value, description FROM payment WHERE ride_id = #{rideId}
     </select>
+    <select id="findByDescription" resultMap="PaymentResultMap">
+        SELECT payment_id, ride_id, value, description FROM payment WHERE UPPER(description) = UPPER(#{description})
+    </select>
 
     <insert id="insertPayment" parameterType="sk.pds.semestralka.model.Payment">
         INSERT INTO payment (ride_id, value, description) VALUES (#{rideId}, #{value}, #{description})

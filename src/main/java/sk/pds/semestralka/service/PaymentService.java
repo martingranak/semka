@@ -25,6 +25,10 @@ public class PaymentService {
         return this.paymentMapper.findByRide(rideId);
     }
 
+    public List<Payment> findByDescription(String description) {
+        return this.paymentMapper.findByDescription(description);
+    }
+
     @Transactional
     public Payment addPayment(long rideId,float value, String description) {
         Payment payment = new Payment(rideId, value, description);

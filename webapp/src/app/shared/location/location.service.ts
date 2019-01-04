@@ -21,7 +21,11 @@ export class LocationService {
   }
 
   getAllByRide(rideId: string): Observable<any> {
-    return this.http.get('//localhost:8080/location/ride/' + rideId);
+    return this.http.post('//localhost:8080/location/ride/', null, {
+      params: {
+        'rideId': rideId
+      }
+    });
   }
 
   addLocation(rideId: string, latitude: string, longitude: string, date: string): Observable<any> {
