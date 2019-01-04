@@ -8,6 +8,23 @@
         <result column="birthday" property="birthday"/>
     </resultMap>
 
+    <resultMap id="PersonCourseResultMap" type="sk.pds.semestralka.model.PersonCourse">
+        <id column="person_course_id" property="personCourseId" />
+        <result column="date_from" property="dateFrom" />
+        <result column="date_to" property="dateTo" />
+        <association property="person" javaType="sk.pds.semestralka.model.Person">
+            <id column="identity_number" property="identityNumber"/>
+            <result column="first_name" property="firstName"/>
+            <result column="last_name" property="lastName"/>
+            <result column="birthday" property="birthday"/>
+        </association>
+        <association property="course" javaType="sk.pds.semestralka.model.Course">
+            <id column="course_id" property="courseId"/>
+            <result column="course_name" property="courseName"/>
+            <result column="course_type" property="courseType"/>
+        </association>
+    </resultMap>
+
     <select id="findAll" resultMap="PersonResultMap">
         SELECT identity_number, first_name, last_name, birthday FROM person
     </select>
@@ -26,6 +43,23 @@
 
     <select id="findByLastName" resultMap="PersonResultMap" parameterType="java.lang.String">
         SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(last_name) = UPPER(#{lastName})
+    </select>
+
+    <select id="findAllDrivers" resultMap="PersonCourseResultMap">
+      SELECT
+        pc.person_course_id person_course_id,
+        p.identity_number identity_number,
+        p.first_name first_name,
+        p.last_name last_name,
+        p.birthday birthday,
+        c.course_id course_id,
+        c.course_name course_name,
+        c.course_type course_type,
+        pc.date_from date_from,
+        pc.date_to date_to
+      FROM person_course AS pc
+      JOIN person p on pc.identity_number = p.identity_number
+      JOIN course c on pc.course_id = c.course_id
     </select>
 
     <insert id="insertPerson" parameterType="sk.pds.semestralka.model.Person">

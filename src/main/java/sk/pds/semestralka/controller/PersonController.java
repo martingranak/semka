@@ -3,6 +3,7 @@ package sk.pds.semestralka.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sk.pds.semestralka.model.Person;
+import sk.pds.semestralka.model.PersonCourse;
 import sk.pds.semestralka.service.PersonService;
 
 import java.util.List;
@@ -36,6 +37,11 @@ public class PersonController {
     @RequestMapping(value = "/lastname/{lastName}", method = RequestMethod.GET)
     public List<Person> findByLastName(@PathVariable("lastName") String lastName) {
         return this.personService.findByLastName(lastName);
+    }
+
+    @RequestMapping(value = "/drivers", method = RequestMethod.GET)
+    public List<PersonCourse> findByLastName() {
+        return this.personService.findAllDrivers();
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

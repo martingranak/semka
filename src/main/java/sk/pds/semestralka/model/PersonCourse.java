@@ -5,44 +5,45 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class PersonCourse {
-    private long driverCourseId;
-    private long courseId;
-    private String identityNumber;
+    private long personCourseId;
+    private Person person;
+    private Course course;
     private LocalDate dateFrom;
     private LocalDate dateTo;
 
     public PersonCourse() {
     }
 
-    public PersonCourse(long courseId, String identityNumber, LocalDate dateFrom, LocalDate dateTo) {
-        this.courseId = courseId;
-        this.identityNumber = identityNumber;
+    public PersonCourse(long personCourseId, Person person, Course course, LocalDate dateFrom, LocalDate dateTo) {
+        this.personCourseId = personCourseId;
+        this.person = person;
+        this.course = course;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
     }
 
-    public long getId() {
-        return driverCourseId;
+    public long getPersonCourseId() {
+        return personCourseId;
     }
 
-    public void setId(long driverCourseId) {
-        this.driverCourseId = driverCourseId;
+    public void setPersonCourseId(long personCourseId) {
+        this.personCourseId = personCourseId;
     }
 
-    public long getCourseId() {
-        return courseId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setCourseId(long courseId) {
-        this.courseId = courseId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    public String getDriverId() {
-        return identityNumber;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setDriverId(String identityNumber) {
-        this.identityNumber = identityNumber;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public LocalDate getDateFrom() {
@@ -66,24 +67,24 @@ public class PersonCourse {
         if (this == o) return true;
         if (!(o instanceof PersonCourse)) return false;
         PersonCourse that = (PersonCourse) o;
-        return getId() == that.getId() &&
-                getCourseId() == that.getCourseId() &&
-                getDriverId() == that.getDriverId() &&
+        return getPersonCourseId() == that.getPersonCourseId() &&
+                getPerson().equals(that.getPerson()) &&
+                getCourse().equals(that.getCourse()) &&
                 getDateFrom().equals(that.getDateFrom()) &&
                 getDateTo().equals(that.getDateTo());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCourseId(), getDriverId(), getDateFrom(), getDateTo());
+        return Objects.hash(getPersonCourseId(), getPerson(), getCourse(), getDateFrom(), getDateTo());
     }
 
     @Override
     public String toString() {
         return "PersonCourse{" +
-                "id=" + driverCourseId +
-                ", courseId=" + courseId +
-                ", driverId=" + identityNumber +
+                "personCourseId=" + personCourseId +
+                ", person=" + person +
+                ", course=" + course +
                 ", dateFrom=" + dateFrom +
                 ", dateTo=" + dateTo +
                 '}';

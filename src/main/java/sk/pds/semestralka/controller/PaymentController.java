@@ -28,6 +28,11 @@ public class PaymentController {
         return this.paymentService.findByRide(rideId);
     }
 
+    @RequestMapping(value = "/decsription/{description}", method = RequestMethod.GET)
+    public List<Payment> findByDescription(@PathVariable("description") String description) {
+        return this.paymentService.findByDescription(description);
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Payment addPayment(@RequestParam("rideId") long rideId, @RequestParam("value") float value, @RequestParam("description") String description) {
         return this.paymentService.addPayment(rideId, value, description);

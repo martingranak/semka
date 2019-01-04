@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.pds.semestralka.mapper.PersonMapper;
 import sk.pds.semestralka.model.Person;
+import sk.pds.semestralka.model.PersonCourse;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -33,6 +34,10 @@ public class PersonService {
 
     public List<Person> findByLastName(String lastName) {
         return this.personMapper.findByLastName(lastName);
+    }
+
+    public List<PersonCourse> findAllDrivers() {
+        return this.personMapper.findAllDrivers();
     }
 
     @Transactional
