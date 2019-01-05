@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Add car</h1>
+  <form >
+    <div class="form-group">
+      <input type="text" class="form-control" id="name" placeholder="Name" [(ngModel)]="carName" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control" id="type" placeholder="Type" [(ngModel)]="carType" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control" id="fuelType" placeholder="fuelType" [(ngModel)]="carFuelType" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <input type="text" class="form-control" id="consumption" placeholder="Consumption" [(ngModel)]="carConsumption" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+      <input type="file" (change)="onFileChanged($event)">
+    </div>
+
+    <a (click)="onSubmit()" class="btn btn-success">Submit</a>
+  </form>
+</div>

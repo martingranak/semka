@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms'
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -14,8 +14,6 @@ import { AgmCoreModule } from "@agm/core";
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LayoutModule } from '@angular/cdk/layout';
-
-
 
 
 @NgModule({
@@ -37,6 +35,7 @@ import { LayoutModule } from '@angular/cdk/layout';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAcATQVmZqd3v9C-GA5j6mdYYCfalSxmKM'
     }),
+    FormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
