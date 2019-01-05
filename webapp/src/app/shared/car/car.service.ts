@@ -28,7 +28,7 @@ export class CarService {
     return this.http.get('//localhost:8080/car/type/' + carType);
   }
 
-  getAllByFuel(carFuelType: string): Observable<any> {
+  getAllByFuel(carFuelType:  string): Observable<any> {
     return this.http.get('//localhost:8080/car/fuel/' + carFuelType);
   }
 
@@ -46,7 +46,7 @@ export class CarService {
     });
   }
 
-  updateCar(carId: BigInteger, carName: string, carType: string, carFuelType: string, carConsumption: string, carPicture: Blob) {
+  updateCar(carId: string, carName: string, carType: string, carFuelType: string, carConsumption: string, carPicture: Blob) {
     var data = {
       'carId': carId,
       'carName': carName,
@@ -56,11 +56,11 @@ export class CarService {
       'carPicture': carPicture
     }
 
-    this.http.put('//localhost:8080/car/update', data);
+    return this.http.put('//localhost:8080/car/update', data);
   }
 
   removeCar(carId: string) {
-    this.http.delete('//localhost:8080/car/remove', {
+    return this.http.delete('//localhost:8080/car/remove', {
       params: {
         'carId': carId
       }

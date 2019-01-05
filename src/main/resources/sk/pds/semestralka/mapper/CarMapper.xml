@@ -15,7 +15,7 @@
     </select>
 
     <select id="findById" parameterType="java.lang.Long" resultMap="CarResultMap">
-        SELECT car_id, name, type, fuel, consumption, picture FROM car WHERE id = #{carId}
+        SELECT car_id, name, type, fuel, consumption, picture FROM car WHERE car_id = #{carId}
     </select>
 
     <select id="findByName" parameterType="java.lang.String" resultMap="CarResultMap">

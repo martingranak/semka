@@ -1,0 +1,65 @@
+<a class="btn btn-success pull-right" (click)="updateCar()" *ngIf="!update">Update</a>
+<a class="btn btn-success pull-right" (click)="updateCar()" *ngIf="update">Close editing</a>
+<a class="btn btn-success pull-right" routerLink="/car-list">Back to carlist</a>
+<div class="container" *ngIf="car && !update">
+<br>
+<form >
+    <div class="form-group">
+        ID: {{ car.id }}
+    </div>
+
+    <div class="form-group">
+        Name: {{ car.name }}
+    </div>
+
+    <div class="form-group">
+        Type: {{ car.type }}
+    </div>
+
+    <div class="form-group">
+        Fuel Type: {{ car.fuel}}
+    </div>
+
+    <div class="form-group">
+        Consumption: {{ car.consumption }}
+    </div>
+
+    <div class="form-group">
+        <img src="data:image/png;base64,{{car.picture}}" alt="" width="400px" />
+    </div>
+
+</form>
+</div>
+
+<div class="container" *ngIf="car && update">
+<h1>Update car #{{ car.id }}</h1>
+    <div class="form-group">
+        <label for="name">name</label>
+        <input type="text" class="form-control" id="name" placeholder="Name" [(ngModel)]="car.name" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+        <label for="type">type</label>
+        <input type="text" class="form-control" id="type" placeholder="Type" [(ngModel)]="car.type" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+        <label for="fuel">fuel</label>
+        <input type="text" class="form-control" id="fuelType" placeholder="fuelType" [(ngModel)]="car.fuel" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+        <label for="consumption">consumption</label>
+        <input type="text" class="form-control" id="consumption" placeholder="Consumption" [(ngModel)]="car.consumption" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="form-group">
+        <input type="file" (change)="onFileChanged($event)" [(ngModel)]="car.picture" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <a (click)="onSubmit()" class="btn btn-success">Submit</a>
+</div>
+      
+
+
+
