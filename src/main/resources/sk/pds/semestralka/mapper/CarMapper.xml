@@ -51,6 +51,7 @@
     </select>
 
     <select id="findById" parameterType="java.lang.Long" resultMap="CarResultMap">
+
         SELECT
           car.car_id car_id,
           car.name car_name,
