@@ -63,11 +63,22 @@
     </select>
 
     <insert id="insertPerson" parameterType="sk.pds.semestralka.model.Person">
-        INSERT INTO person (identity_number, first_name, last_name, birthday) VALUES (#{identity_number}, #{first_name}, #{last_name}, #{birthday})
+        INSERT INTO person (first_name, last_name, birthday)
+        VALUES (#{person.first_name}, #{person.last_name}, #{person.birthday})
+    </insert>
+
+    <insert id="insertCourseToPerson" parameterType="sk.pds.semestralka.model.PersonCourse">
+        INSERT INTO person_course (identity_number, course_id, date_from, date_to)
+        VALUES (#{personCourse.person.identityNumber}, #{personCourse.course.courseId}, #{personCourse.dateFrom}, #{personCourse.dateTo});
     </insert>
 
     <update id="updatePerson" parameterType="sk.pds.semestralka.model.Person">
-        UPDATE person SET (course_name, course_type) = (#{courseName}, #{courseType}) WHERE UPPER(identity_number) = UPPER(#{identityNumber})
+        UPDATE
+          person
+        SET
+          (first_name, last_name, birthday) = (#{person.first_name}, #{person.last_name}, #{person.birthday})
+        WHERE
+          UPPER(identity_number) = UPPER(#{identityNumber})
     </update>
 
     <delete id="deletePerson" parameterType="java.lang.Long">

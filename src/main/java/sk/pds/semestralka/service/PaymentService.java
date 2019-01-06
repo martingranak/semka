@@ -30,7 +30,7 @@ public class PaymentService {
     }
 
     @Transactional
-    public Payment addPayment(long rideId,float value, String description) {
+    public Payment addPayment(long rideId, double value, String description) {
         Payment payment = new Payment(rideId, value, description);
         this.paymentMapper.insertPayment(payment);
         return payment;

@@ -34,7 +34,7 @@ public class PaymentController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Payment addPayment(@RequestParam("rideId") long rideId, @RequestParam("value") float value, @RequestParam("description") String description) {
+    public Payment addPayment(@RequestParam("rideId") long rideId, @RequestParam("value") double value, @RequestParam("description") String description) {
         return this.paymentService.addPayment(rideId, value, description);
     }
 

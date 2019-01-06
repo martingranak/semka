@@ -35,9 +35,10 @@ public class RideController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Ride add(@RequestParam("identityNumber") String identityNumber, @RequestParam("carId") long carId,
-                    @RequestParam("dateFrom") String dateFrom, @RequestParam("dateTo") String dateTo) {
-        return this.rideService.addRide(carId, identityNumber, dateFrom, dateTo);
+    public Ride add(@RequestParam("identityNumber") long identityNumber, @RequestParam("carId") long carId,
+                    @RequestParam("dateFrom") String dateFrom, @RequestParam("timeFrom") String timeFrom,
+                    @RequestParam("dateTo") String dateTo, @RequestParam("timeTo") String timeTo) {
+        return this.rideService.addRide(carId, identityNumber, dateFrom, timeFrom, dateTo, timeTo);
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)

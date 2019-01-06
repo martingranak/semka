@@ -21,11 +21,17 @@
     </select>
 
     <insert id="insertLocation" parameterType="sk.pds.semestralka.model.Location">
-        INSERT INTO location (ride_id, coordinates, time) VALUES (#{rideId}, new coordinates(#{latitude}, #{longitude}), #{time})
+        INSERT INTO location (ride_id, coordinates, time)
+        VALUES (#{location.rideId}, ROW(#{location.coordinates.latitude}, #{location.coordinates.longitude}), #{location.time})
     </insert>
 
     <update id="updateLocation" parameterType="sk.pds.semestralka.model.Location">
-        UPDATE location SET (ride_id, coordinates, time) = (#{rideId}, new coordinates(#{latitude}, #{longitude}), #{time}) WHERE location_id = #{locationId}
+        UPDATE
+          location
+        SET
+          (ride_id, coordinates, time) = (#{location.rideId}, ROW(#{location.coordinates.latitude}, #{location.coordinates.longitude}), #{location.time})
+        WHERE
+          location_id = #{locationId}
     </update>
 
     <delete id="deleteLocation" parameterType="java.lang.Long">

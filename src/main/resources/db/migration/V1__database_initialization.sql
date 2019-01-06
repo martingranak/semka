@@ -14,7 +14,7 @@ create type ride as
 (
 	ride_id bigint,
 	car_id integer,
-	identity_number varchar(20),
+	identity_number bigint,
 	datetime_from timestamp,
 	datetime_to timestamp
 );
@@ -52,7 +52,7 @@ alter table course owner to postgres;
 
 create table if not exists person
 (
-	identity_number varchar(20) not null
+	identity_number bigint not null
 		constraint person_pk
 			primary key,
 	first_name varchar(50) not null,
@@ -73,7 +73,7 @@ create table if not exists person_course
 				on update cascade on delete cascade,
 	date_from timestamp not null,
 	date_to timestamp,
-	identity_number varchar(20) not null
+	identity_number bigint not null
 		constraint person_course_person_identity_number_fk
 			references person
 				on update cascade on delete cascade

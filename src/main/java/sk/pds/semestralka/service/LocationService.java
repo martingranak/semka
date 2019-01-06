@@ -28,7 +28,7 @@ public class LocationService {
     }
 
     @Transactional
-    public Location addLocation(long rideId, float latitude, float longtitude, String date) {
+    public Location addLocation(long rideId, double latitude, double longtitude, String date) {
         LocalDateTime dateTime = LocalDateTime.parse(date);
         Location location = new Location(rideId, new Coordinates(latitude, longtitude), dateTime);
         this.locationMapper.insertLocation(location);

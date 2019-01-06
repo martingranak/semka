@@ -24,11 +24,12 @@
     </select>
 
     <insert id="insertPayment" parameterType="sk.pds.semestralka.model.Payment">
-        INSERT INTO payment (ride_id, value, description) VALUES (#{rideId}, #{value}, #{description})
+        INSERT INTO payment (ride_id, value, description) VALUES (#{payment.rideId}, #{payment.value}, #{payment.description})
     </insert>
 
     <update id="updatePayment" parameterType="sk.pds.semestralka.model.Payment">
-        UPDATE payment SET (course_name, course_type) = (#{rideId}, #{value}, #{description}) WHERE payment_id = #{paymentId}
+        UPDATE payment SET (ride_id, value, description) = (#{payment.rideId}, #{payment.value}, #{payment.description})
+        WHERE payment_id = #{paymentId}
     </update>
 
     <delete id="deletePayment" parameterType="java.lang.Long">

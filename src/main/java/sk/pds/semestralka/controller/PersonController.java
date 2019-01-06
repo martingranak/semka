@@ -45,7 +45,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public Person addPerson(@RequestParam("identityNumber") String identityNumber, @RequestParam("firstName") String firstName,
+    public Person addPerson(@RequestParam("identityNumber") long identityNumber, @RequestParam("firstName") String firstName,
                             @RequestParam("lastName") String lastName, @RequestParam("birthday") String birthday) {
         return this.personService.addPerson(identityNumber, firstName, lastName, birthday);
     }
