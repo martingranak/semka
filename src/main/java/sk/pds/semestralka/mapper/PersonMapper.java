@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import sk.pds.semestralka.model.Person;
 import sk.pds.semestralka.model.PersonCourse;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Mapper
@@ -18,4 +19,6 @@ public interface PersonMapper {
     void insertPerson(@Param("person") Person person);
     void updatePerson(@Param("person") Person person);
     void deletePerson(@Param("identityNumber") String identityNumber);
+
+    void insertCourseToPerson(@Param("personCourse") PersonCourse personCourse);
 }

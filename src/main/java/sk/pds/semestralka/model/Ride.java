@@ -7,14 +7,14 @@ import java.util.Objects;
 public class Ride {
     private long rideId;
     private long carId;
-    private String identityNumber;
+    private long identityNumber;
     private LocalDateTime datetimeFrom;
     private LocalDateTime datetimeTo;
 
     public Ride() {
     }
 
-    public Ride(long carId, String identityNumber, LocalDateTime datetimeFrom, LocalDateTime datetimeTo) {
+    public Ride(long carId, long identityNumber, LocalDateTime datetimeFrom, LocalDateTime datetimeTo) {
         this.carId = carId;
         this.identityNumber = identityNumber;
         this.datetimeFrom = datetimeFrom;
@@ -37,11 +37,11 @@ public class Ride {
         this.carId = carId;
     }
 
-    public String getIdentityNumber() {
+    public long getIdentityNumber() {
         return identityNumber;
     }
 
-    public void setIdentityNumber(String identityNumber) {
+    public void setIdentityNumber(long identityNumber) {
         this.identityNumber = identityNumber;
     }
 
@@ -68,7 +68,7 @@ public class Ride {
         Ride ride = (Ride) o;
         return rideId == ride.rideId &&
                 getCarId() == ride.getCarId() &&
-                getIdentityNumber().equals(ride.getIdentityNumber()) &&
+                getIdentityNumber() == ride.getIdentityNumber() &&
                 getDatetimeFrom().equals(ride.getDatetimeFrom()) &&
                 getDatetimeTo().equals(ride.getDatetimeTo());
     }

@@ -14,16 +14,12 @@ create type ride as
 (
 	ride_id bigint,
 	car_id integer,
-	identity_number varchar(20),
+	identity_number bigint,
 	datetime_from timestamp,
 	datetime_to timestamp
 );
 
 alter type ride owner to postgres;
-
-create type fuel_type as enum ('95', '100', 'D', 'LPG');
-
-alter type fuel_type owner to postgres;
 
 create table if not exists car
 (
@@ -32,12 +28,28 @@ create table if not exists car
 			primary key,
 	name varchar(50) not null,
 	type varchar(20) not null,
-	fuel fuel_type not null,
+	fuel varchar(4) not null,
 	consumption double precision not null,
-	picture bytea
+	picture_id bigint not null
 );
 
 alter table car owner to postgres;
+
+create table car_picture
+(
+	picture_id bigserial not null
+		constraint car_picture_pk
+			primary key,
+	name varchar(20) not null,
+	subname varchar(20) not null,
+	type varchar(10) not null,
+	color varchar(10) not null,
+	picture bytea
+);
+
+alter table car_picture owner to postgres;
+
+alter table car ADD CONSTRAINT car_picture_car_picture_id_fk FOREIGN KEY (picture_id) REFERENCES car_picture (picture_id) on update cascade on delete cascade;
 
 create table if not exists course
 (
@@ -52,7 +64,7 @@ alter table course owner to postgres;
 
 create table if not exists person
 (
-	identity_number varchar(20) not null
+	identity_number bigint not null
 		constraint person_pk
 			primary key,
 	first_name varchar(50) not null,
@@ -73,7 +85,7 @@ create table if not exists person_course
 				on update cascade on delete cascade,
 	date_from timestamp not null,
 	date_to timestamp,
-	identity_number varchar(20) not null
+	identity_number bigint not null
 		constraint person_course_person_identity_number_fk
 			references person
 				on update cascade on delete cascade
@@ -132,4 +144,21 @@ end;
 $$;
 
 alter function picture_import(text, out bytea) owner to postgres;
+
+create or replace function seed_car_pictures(p_path text, p_result out boolean)
+language plpgsql as $$
+declare
+  pictures cursor for select * from car_picture;
+begin
+  p_result := false;
+  for pic in pictures
+  loop
+    UPDATE car_picture SET picture = picture_import(p_path || pic.name || '\' || pic.type || '\' || pic.subname || '-' || pic.color || '.jpg') WHERE picture_id = pic.picture_id;
+  end loop;
+  p_result := true;
+end;$$;
+
+alter function seed_car_pictures(text, out bytea) owner to postgres;
+
+--select seed_car_pictures('D:\obr\');
 

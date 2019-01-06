@@ -6,7 +6,9 @@ import sk.pds.semestralka.mapper.RideMapper;
 import sk.pds.semestralka.model.Ride;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -32,10 +34,14 @@ public class RideService {
     }
 
     @Transactional
-    public Ride addRide(long carId, String identityNumber, String dateFrom, String dateTo) {
-        LocalDateTime dateTimeFrom = LocalDateTime.parse(dateFrom);
-        LocalDateTime dateTimeTo = LocalDateTime.parse(dateTo);
-        Ride ride = new Ride(carId, identityNumber, dateTimeFrom, dateTimeTo);
+    public Ride addRide(long carId, long identityNumber, String dateFrom, String timeFrom, String dateTo, String timeTo) {
+        LocalDate localDateFrom = LocalDate.parse(dateFrom);
+        LocalDate localDateTo = LocalDate.parse(dateTo);
+        LocalTime localTimeFrom = LocalTime.parse(timeFrom);
+        LocalTime localTimeTo = LocalTime.parse(timeTo);
+        LocalDateTime localDateTimeFrom = LocalDateTime.of(localDateFrom, localTimeFrom);
+        LocalDateTime localDateTimeTo = LocalDateTime.of(localDateTo, localTimeTo);
+        Ride ride = new Ride(carId, identityNumber, localDateTimeFrom, localDateTimeTo);
         this.rideMapper.insertRide(ride);
         return ride;
     }

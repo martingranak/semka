@@ -10,7 +10,7 @@ import java.util.List;
 public interface RideMapper {
     List<Ride> findAll();
     Ride findById(@Param("rideId") long id);
-    List<Ride> findByDriver(@Param("driverId") long driverId);
+    List<Ride> findByDriver(@Param("identityNumber") long identityNumber);
     List<Ride> findByCar(@Param("carId") long carId);
     void insertRide(@Param("ride") Ride ride);
     void updateRide(@Param("ride") Ride ride);

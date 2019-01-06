@@ -3,6 +3,7 @@ package sk.pds.semestralka.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.pds.semestralka.mapper.PersonMapper;
+import sk.pds.semestralka.model.Course;
 import sk.pds.semestralka.model.Person;
 import sk.pds.semestralka.model.PersonCourse;
 
@@ -41,7 +42,14 @@ public class PersonService {
     }
 
     @Transactional
-    public Person addPerson(String identityNumber, String firstName,String lastName, String birthday) {
+    public void addCourseToPerson(Person person, Course course, String dateFrom, String dateTo) {
+        LocalDate localDateFrom = LocalDate.parse(dateFrom);
+        LocalDate localDateTo = LocalDate.parse(dateTo);
+        this.personMapper.insertCourseToPerson(new PersonCourse(person, course, localDateFrom, localDateTo));
+    }
+
+    @Transactional
+    public Person addPerson(long identityNumber, String firstName,String lastName, String birthday) {
         LocalDate birthdate = LocalDate.parse(birthday);
         Person person = new Person(identityNumber, firstName, lastName, birthdate);
         this.personMapper.insertPerson(person);

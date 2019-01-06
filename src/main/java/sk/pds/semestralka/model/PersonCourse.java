@@ -14,6 +14,13 @@ public class PersonCourse {
     public PersonCourse() {
     }
 
+    public PersonCourse(Person person, Course course, LocalDate dateFrom, LocalDate dateTo) {
+        this.person = person;
+        this.course = course;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+    }
+
     public PersonCourse(long personCourseId, Person person, Course course, LocalDate dateFrom, LocalDate dateTo) {
         this.personCourseId = personCourseId;
         this.person = person;

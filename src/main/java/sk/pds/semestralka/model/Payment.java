@@ -6,13 +6,13 @@ import java.util.Objects;
 public class Payment {
     private long paymentId;
     private long rideId;
-    private float value;
+    private double value;
     private String description;
 
     public Payment() {
     }
 
-    public Payment(long rideId, float value, String description) {
+    public Payment(long rideId, double value, String description) {
         this.rideId = rideId;
         this.value = value;
         this.description = description;
@@ -34,11 +34,11 @@ public class Payment {
         this.rideId = rideId;
     }
 
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
@@ -57,7 +57,7 @@ public class Payment {
         Payment payment = (Payment) o;
         return getId() == payment.getId() &&
                 getRideId() == payment.getRideId() &&
-                Float.compare(payment.getValue(), getValue()) == 0 &&
+                Double.compare(payment.getValue(), getValue()) == 0 &&
                 getDescription().equals(payment.getDescription());
     }
 

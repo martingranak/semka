@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Person {
-    private String identityNumber;
+    private long identityNumber;
     private String firstName;
     private String lastName;
     private LocalDate birthday;
@@ -16,18 +16,18 @@ public class Person {
     public Person() {
     }
 
-    public Person(String identityNumber, String firstName, String lastName, LocalDate birthday) {
+    public Person(long identityNumber, String firstName, String lastName, LocalDate birthday) {
         this.identityNumber = identityNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
     }
 
-    public String getIdentityNumber() {
+    public long getIdentityNumber() {
         return identityNumber;
     }
 
-    public void setIdentityNumber(String identityNumber) {
+    public void setIdentityNumber(long identityNumber) {
         this.identityNumber = identityNumber;
     }
 
@@ -60,7 +60,7 @@ public class Person {
         if (this == o) return true;
         if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return getIdentityNumber().equals(person.getIdentityNumber()) &&
+        return getIdentityNumber() == person.getIdentityNumber() &&
                 getFirstName().equals(person.getFirstName()) &&
                 getLastName().equals(person.getLastName()) &&
                 getBirthday().equals(person.getBirthday());

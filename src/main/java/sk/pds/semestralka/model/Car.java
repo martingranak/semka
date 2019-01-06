@@ -9,22 +9,27 @@ public class Car {
     private String name;
     private String type;
     private String fuel;
-    private float consumption;
-    @Lob
-    @Column(name="picture")
-    @Type(type="org.hibernate.type.BinaryType")
+    private double consumption;
     private byte[] picture;
-    private String pictureString;
+    private int pictureId;
 
     public Car() {
     }
 
-    public Car(String name, String type, String fuel, float consumption, byte[] picture) {
+    public Car(String name, String type, String fuel, double consumption, byte[] picture) {
         this.name = name;
         this.type = type;
         this.fuel = fuel;
         this.consumption = consumption;
         this.picture = picture;
+    }
+
+    public Car(String name, String type, String fuel, double consumption, int pictureId) {
+        this.name = name;
+        this.type = type;
+        this.fuel = fuel;
+        this.consumption = consumption;
+        this.pictureId = pictureId;
     }
 
     public Long getId() {
@@ -59,11 +64,11 @@ public class Car {
         this.fuel = fuel;
     }
 
-    public float getConsumption() {
+    public double getConsumption() {
         return consumption;
     }
 
-    public void setConsumption(float consumption) {
+    public void setConsumption(double consumption) {
         this.consumption = consumption;
     }
 
@@ -75,12 +80,12 @@ public class Car {
         this.picture = picture;
     }
 
-    public String getPictureString() {
-        return pictureString;
+    public int getPictureId() {
+        return pictureId;
     }
 
-    public void setPictureString(String pictureString) {
-        this.pictureString = pictureString;
+    public void setPictureId(int pictureId) {
+        this.pictureId = pictureId;
     }
 
     @Override
@@ -88,7 +93,7 @@ public class Car {
         if (this == o) return true;
         if (!(o instanceof Car)) return false;
         Car car = (Car) o;
-        return Float.compare(car.getConsumption(), getConsumption()) == 0 &&
+        return Double.compare(car.getConsumption(), getConsumption()) == 0 &&
                 getId().equals(car.getId()) &&
                 getName().equals(car.getName()) &&
                 getType().equals(car.getType()) &&

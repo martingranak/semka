@@ -20,11 +20,11 @@
     </select>
 
     <insert id="insertCourse" parameterType="sk.pds.semestralka.model.Course">
-        INSERT INTO course (course_name, course_type) VALUES (#{courseName}, #{courseType})
+        INSERT INTO course (course_name, course_type) VALUES (#{course.courseName}, #{course.courseType})
     </insert>
 
     <update id="updateCourse" parameterType="sk.pds.semestralka.model.Course">
-        UPDATE course SET (course_name, course_type) = (#{courseName}, #{courseType}) WHERE course_id = #{courseId}
+        UPDATE course SET (course_name, course_type) = (#{course.courseName}, #{course.courseType}) WHERE course_id = #{course.courseId}
     </update>
 
     <delete id="deleteCourse" parameterType="java.lang.Long">

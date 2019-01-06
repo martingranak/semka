@@ -3,39 +3,126 @@
 <mapper namespace="sk.pds.semestralka.mapper.CarMapper">
     <resultMap id="CarResultMap" type="sk.pds.semestralka.model.Car">
         <id column="car_id" property="carId" />
-        <result column="name" property="name" />
-        <result column="type" property="type" />
+        <result column="car_name" property="name" />
+        <result column="car_type" property="type" />
         <result column="fuel" property="fuel" />
         <result column="consumption" property="consumption" />
         <result column="picture" property="picture" />
     </resultMap>
 
+    <resultMap id="CarWithoutPictureResultMap" type="sk.pds.semestralka.model.Car">
+        <id column="car_id" property="carId" />
+        <result column="car_name" property="name" />
+        <result column="car_type" property="type" />
+        <result column="fuel" property="fuel" />
+        <result column="consumption" property="consumption" />
+        <result column="picture_id" property="pictureId" />
+    </resultMap>
+
+    <resultMap id="CarPictureResultMap" type="sk.pds.semestralka.model.CarPicture">
+        <id column="picture_id" property="pictureId" />
+        <result column="name" property="name" />
+        <result column="subname" property="subName" />
+        <result column="type" property="type" />
+        <result column="color" property="color" />
+        <result column="picture" property="picture" />
+    </resultMap>
+
     <select id="findAll" resultMap="CarResultMap">
-        SELECT car_id, name, type, fuel, consumption, picture FROM car
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+    </select>
+
+    <select id="findAllWithoutPictures" resultMap="CarWithoutPictureResultMap">
+        SELECT car_id, name car_name, type car_type, fuel, consumption, picture_id from car;
+    </select>
+
+    <select id="findAllCarPictures" resultMap="CarPictureResultMap">
+        SELECT picture_id, name, subname, type, color, picture FROM car_picture
     </select>
 
     <select id="findById" parameterType="java.lang.Long" resultMap="CarResultMap">
-        SELECT car_id, name, type, fuel, consumption, picture FROM car WHERE car_id = #{carId}
+
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+        WHERE car.car_id = #{carId}
+    </select>
+
+    <select id="findPictureById" parameterType="java.lang.Long" resultMap="CarPictureResultMap">
+        SELECT picture_id, name, subname, type, color, picture FROM car_picture WHERE picture_id = #{pictureId}
     </select>
 
     <select id="findByName" parameterType="java.lang.String" resultMap="CarResultMap">
-        SELECT car_id, name, type, fuel, consumption, picture FROM car WHERE upper(name) like upper(#{carName})
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+        WHERE
+          upper(car.name) like upper(#{carName})
     </select>
 
     <select id="findByType" parameterType="java.lang.String" resultMap="CarResultMap">
-        SELECT car_id, name, type, fuel, consumption, picture FROM car WHERE upper(type) like upper(#{carType})
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+        WHERE
+          upper(car.type) like upper(#{carType})
     </select>
 
     <select id="findByFuelType" parameterType="java.lang.String" resultMap="CarResultMap">
-        SELECT car_id, name, type, fuel, consumption, picture FROM car WHERE upper(fuel) like upper(#{carFuelType})
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+        WHERE upper(car.fuel) like upper(#{carFuelType})
     </select>
 
     <insert id="insertCar" parameterType="sk.pds.semestralka.model.Car">
-        INSERT INTO car (name, type, fuel, consumption, picture) VALUES (#{name}, #{type}, #{fuelType}, #{consumption}, #{picture})
+        INSERT INTO car (name, type, fuel, consumption, picture_id) VALUES (#{car.name}, #{car.type}, #{car.fuel}, #{car.consumption}, #{car.pictureId})
     </insert>
 
     <update id="updateCar" parameterType="sk.pds.semestralka.model.Car">
-        UPDATE car SET (name, type, fuel, consumption, picture) = (#{name}, #{type}, #{fuelType}, #{consumption}, #{picture}) WHERE car_id = #{carId}
+        UPDATE car SET (name, type, fuel, consumption, picture_id) = (#{car.name}, #{car.type}, #{car.fuel}, #{car.consumption}, #{car.pictureId}) WHERE car_id = #{car.carId}
     </update>
 
     <delete id="deleteCar" parameterType="java.lang.Long">
