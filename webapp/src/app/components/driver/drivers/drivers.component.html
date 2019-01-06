@@ -1,0 +1,21 @@
+
+<a class="btn btn btn-success pull-right" routerLink="/driver-create">Add driver</a>
+<h2>Driver List</h2>
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>first name</th> 
+    <th>last name</th>
+    <th>birthday</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let driver of drivers">
+    <td>{{ driver.identityNumber }}</td>
+    <td>{{ driver.firstName }}</td>
+    <td>{{ driver.lastName }}</td>
+    <td>{{ driver.birthday }}</td><td>
+      <a class="btn btn btn-success pull-right" (click)="onSelect(driver)">Detail</a>
+      <a class="btn btn btn-danger pull-right" (click)="deleteDriver(driver.identityNumber)">Delete</a>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,23 @@
+<div class="container">
+    <h1>Add driver</h1>
+    <form >
+      <div class="form-group">
+        <input type="text" class="form-control" id="identifyNumber" placeholder="identifyNumber" [(ngModel)]="identifyNumber" [ngModelOptions]="{standalone: true}">
+      </div>
+  
+      <div class="form-group">
+        <input type="text" class="form-control" id="firstName" placeholder="firstName" [(ngModel)]="firstName" [ngModelOptions]="{standalone: true}">
+      </div>
+  
+      <div class="form-group">
+        <input type="text" class="form-control" id="lastName" placeholder="lastName" [(ngModel)]="lastName" [ngModelOptions]="{standalone: true}">
+      </div>
+  
+      <div class="form-group">
+        <input type="date" class="form-control" id="birthday" placeholder="birthday" [(ngModel)]="birthday" [ngModelOptions]="{standalone: true}">
+      </div>
+  
+      <a (click)="onSubmit()" class="btn btn-success">Submit</a>
+    </form>
+  </div>
+  

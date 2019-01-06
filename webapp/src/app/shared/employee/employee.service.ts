@@ -9,7 +9,7 @@ export class EmployeeService {
   }
 
   getAll(): Observable<any> {
-    return this.http.get('//localhost:8080/location/all');
+    return this.http.get('//localhost:8080/person/all');
   }
 
   getOne(identityNumber: string): Observable<any> {
@@ -37,7 +37,7 @@ export class EmployeeService {
       params: {
         'identityNumber': identityNumber,
         'firstName': firstName,
-        'longitude': lastName,
+        'lastName': lastName,
         'birthday': birthday
       }
     });
@@ -47,15 +47,15 @@ export class EmployeeService {
     var data = {
       'identityNumber': identityNumber,
       'firstName': firstName,
-      'longitude': lastName,
+      'lastName': lastName,
       'birthday': birthday
     }
 
-    this.http.put('//localhost:8080/person/update', data);
+    return this.http.put('//localhost:8080/person/update', data);
   }
 
   removeEmployee(identityNumber: string) {
-    this.http.delete('//localhost:8080/person/remove', {
+    return this.http.delete('//localhost:8080/person/remove', {
       params: {
         'identityNumber': identityNumber
       }
