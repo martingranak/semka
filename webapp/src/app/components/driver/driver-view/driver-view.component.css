@@ -18,3 +18,8 @@
     background-color:#343a40!important;
     color: white;
 }
+
+.pull-right {
+    margin: 5px;
+    float: right;
+}

@@ -1,7 +1,7 @@
 
 <a class="btn btn btn-success pull-right" routerLink="/car-create">Add car</a>
 <h2>Car List</h2>
-<table class="table">
+<table class="table" *ngIf="cars">
   <tr>
     <th>id</th>
     <th>name</th> 
