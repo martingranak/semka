@@ -37,7 +37,7 @@ public class SeedController {
 
     @RequestMapping(value = "/seed", method = RequestMethod.GET)
     public void removePerson() {
-        /*List<Person> persons = this.personService.findAll();
+        List<Person> persons = this.personService.findAll();
         List<Course> courses = this.courseService.findAll();
         for (Person person : persons) {
             int courseNum = ThreadLocalRandom.current().nextInt(1, courses.size());
@@ -102,6 +102,9 @@ public class SeedController {
             Car car = cars.get(carIndex);
             int rideNum = ThreadLocalRandom.current().nextInt(0, 5);
             for (int i = 0; i < rideNum; i++) {
+                if (index>29999) {
+                    break;
+                }
                 Person person = persons.get(index);
                 index += ThreadLocalRandom.current().nextInt(0, 5);
                 int year = 2018 + ThreadLocalRandom.current().nextInt(0, 2);
@@ -151,12 +154,10 @@ public class SeedController {
             index += ThreadLocalRandom.current().nextInt(1, 11);
             carIndex++;
         }
-        */
         List<Ride> rides = this.rideService.findAllRides();
-        /*
-        int index = ThreadLocalRandom.current().nextInt(0, 3);
-        while (index < rides.size()) {
-            Ride ride = rides.get(index);
+        int index2 = ThreadLocalRandom.current().nextInt(0, 3);
+        while (index2 < rides.size()) {
+            Ride ride = rides.get(index2);
             int paymentNum = ThreadLocalRandom.current().nextInt(1, 4);
             for (int i = 0; i < paymentNum; i++) {
                 int paymentDesc = ThreadLocalRandom.current().nextInt(0, 3);
@@ -179,17 +180,17 @@ public class SeedController {
 
                 this.paymentService.addPayment(ride.getId(), value, desc);
             }
-            index += ThreadLocalRandom.current().nextInt(0, 5);
+            index2 += ThreadLocalRandom.current().nextInt(0, 5);
         }
-        */
+
         for (Ride ride : rides) {
             LocalDateTime rideTime = ride.getDatetimeFrom();
             LocalDateTime now = LocalDateTime.now();
-            LocalDateTime locationTime = rideTime.plusMinutes(1);
+            LocalDateTime locationTime = rideTime.plusMinutes(3);
             double latitude = 49.202076;
             double longitude = 18.761506;
             while (locationTime.isBefore(now) && locationTime.isBefore(ride.getDatetimeTo())) {
-                double value = ThreadLocalRandom.current().nextDouble(0.0, 0.1);
+                double value = ThreadLocalRandom.current().nextDouble(0.0, 0.3);
                 boolean more = ThreadLocalRandom.current().nextBoolean();
                 if (more) {
                     latitude += value;
@@ -198,9 +199,9 @@ public class SeedController {
                 }
                 more = ThreadLocalRandom.current().nextBoolean();
                 if (more) {
-                    longitude += 0.1-value;
+                    longitude += 0.3-value;
                 } else  {
-                    longitude -= 0.1-value;
+                    longitude -= 0.3-value;
                 }
                 this.locationService.addLocation(ride.getId(), latitude, longitude, locationTime.toString());
                 locationTime = locationTime.plusMinutes(1);
