@@ -41,8 +41,23 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/drivers", method = RequestMethod.GET)
-    public List<PersonCourse> findByLastName() {
+    public List<PersonCourse> findAllDrivers() {
         return this.personService.findAllDrivers();
+    }
+
+    @RequestMapping(value = "/drivers/id/{page}", method = RequestMethod.GET)
+    public List<PersonCourse> findAllDriversPageById(@PathVariable("page") int page) {
+        return this.personService.findAllDriversPageById(page, 20);
+    }
+
+    @RequestMapping(value = "/drivers/name/{page}", method = RequestMethod.GET)
+    public List<PersonCourse> findAllDriversPageByName(@PathVariable("page") int page) {
+        return this.personService.findAllDriversPageByName(page, 20);
+    }
+
+    @RequestMapping(value = "/drivers/birthday/{page}", method = RequestMethod.GET)
+    public List<PersonCourse> findAllDriversByBirthdate(@PathVariable("page") int page) {
+        return this.personService.findAllDriversByBirthdate(page, 20);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)

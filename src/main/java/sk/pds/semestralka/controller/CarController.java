@@ -19,6 +19,26 @@ public class CarController {
         return this.carService.findAllCars();
     }
 
+    @RequestMapping(value = "/all/{page}", method = RequestMethod.GET)
+    public List<Car> findAllCarsByPage(@PathVariable("page") int page) {
+        return this.carService.findAllCarsByPage(page, 20);
+    }
+
+    @RequestMapping(value = "/all/name/{page}", method = RequestMethod.GET)
+    public List<Car> findAllCarsPageByName(@PathVariable("page") int page) {
+        return this.carService.findAllCarsPageByName(page, 20);
+    }
+
+    @RequestMapping(value = "/all/type/{page}", method = RequestMethod.GET)
+    public List<Car> findAllCarsPageByType(@PathVariable("page") int page) {
+        return this.carService.findAllCarsPageByType(page, 20);
+    }
+
+    @RequestMapping(value = "/all/fuel/{page}", method = RequestMethod.GET)
+    public List<Car> findAllCarsPageByFuelType(@PathVariable("page") int page) {
+        return this.carService.findAllCarsPageByFuelType(page, 20);
+    }
+
     @RequestMapping(value = "/one", method = RequestMethod.POST)
     public Car findOne(@RequestParam("carId") long carId) {
         return this.carService.findById(carId);

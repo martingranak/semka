@@ -21,12 +21,32 @@ public class RideService {
         return this.rideMapper.findAll();
     }
 
+    public List<Ride> findAllRidesByPageById(int page, int count) {
+        return this.rideMapper.findAllByPageById(count, (page - 1) * count);
+    }
+
+    public List<Ride> findAllRidesByIdentityNumber(int page, int count) {
+        return this.rideMapper.findAllByPageByIdentityNumber(count, (page - 1) * count);
+    }
+
+    public List<Ride> findAllRidesByCarId(int page, int count) {
+        return this.rideMapper.findAllByPageByCarId(count, (page - 1) * count);
+    }
+
+    public List<Ride> findAllRidesByDateFrom(int page, int count) {
+        return this.rideMapper.findAllByPageByDateFrom(count, (page - 1) * count);
+    }
+
+    public List<Ride> findAllRidesByDateTo(int page, int count) {
+        return this.rideMapper.findAllByPageByDateTo(count, (page - 1) * count);
+    }
+
     public Ride findById(long rideId) {
         return this.rideMapper.findById(rideId);
     }
 
-    public List<Ride> findByDriver(long driverId) {
-        return this.rideMapper.findByDriver(driverId);
+    public List<Ride> findByDriver(long identityNumber) {
+        return this.rideMapper.findByPerson(identityNumber);
     }
 
     public List<Ride> findByCar(long carId) {

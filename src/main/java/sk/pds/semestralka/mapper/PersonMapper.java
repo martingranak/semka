@@ -16,6 +16,9 @@ public interface PersonMapper {
     List<Person> findByFirstName(@Param("firstName") String firstName);
     List<Person> findByLastName(@Param("lastName") String lastName);
     List<PersonCourse> findAllDrivers();
+    List<PersonCourse> findAllDriversPageById(@Param("limit") int limit, @Param("offset") int offset);
+    List<PersonCourse> findAllDriversPageByName(@Param("limit") int limit, @Param("offset") int offset);
+    List<PersonCourse> findAllDriversPageByBirthdate(@Param("limit") int limit, @Param("offset") int offset);
     void insertPerson(@Param("person") Person person);
     void updatePerson(@Param("person") Person person);
     void deletePerson(@Param("identityNumber") String identityNumber);

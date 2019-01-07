@@ -19,6 +19,22 @@ public class CarService {
         return this.carMapper.findAll();
     }
 
+    public List<Car> findAllCarsByPage(int page, int count) {
+        return this.carMapper.findAllPage(count, (page - 1) * count);
+    }
+
+    public List<Car> findAllCarsPageByName(int page, int count) {
+        return this.carMapper.findAllPageByName(count, (page - 1) * count);
+    }
+
+    public List<Car> findAllCarsPageByType(int page, int count) {
+        return this.carMapper.findAllPageByType(count, (page - 1) * count);
+    }
+
+    public List<Car> findAllCarsPageByFuelType(int page, int count) {
+        return this.carMapper.findAllPageByFuelType(count, (page - 1) * count);
+    }
+
     public List<Car> findAllCarsWithoutPictures() {
         return this.carMapper.findAllWithoutPictures();
     }

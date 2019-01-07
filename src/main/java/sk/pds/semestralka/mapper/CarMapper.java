@@ -11,6 +11,10 @@ import java.util.List;
 public interface CarMapper {
     List<Car> findAll();
     List<Car> findAllWithoutPictures();
+    List<Car> findAllPage(@Param("limit") int limit, @Param("offset") int offset);
+    List<Car> findAllPageByName(@Param("limit") int limit, @Param("offset") int offset);
+    List<Car> findAllPageByType(@Param("limit") int limit, @Param("offset") int offset);
+    List<Car> findAllPageByFuelType(@Param("limit") int limit, @Param("offset") int offset);
     List<CarPicture> findAllCarPictures();
     Car findById(@Param("carId") long carId);
     CarPicture findPictureById(@Param("pictureId") long pictureId);

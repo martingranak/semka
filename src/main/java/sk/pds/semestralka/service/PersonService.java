@@ -41,6 +41,18 @@ public class PersonService {
         return this.personMapper.findAllDrivers();
     }
 
+    public List<PersonCourse> findAllDriversPageById(int page, int count) {
+        return this.personMapper.findAllDriversPageById(count, (page - 1) * count);
+    }
+
+    public List<PersonCourse> findAllDriversPageByName(int page, int count) {
+        return this.personMapper.findAllDriversPageByName(count, (page - 1) * count);
+    }
+
+    public List<PersonCourse> findAllDriversByBirthdate(int page, int count) {
+        return this.personMapper.findAllDriversPageByBirthdate(count, (page - 1) * count);
+    }
+
     @Transactional
     public void addCourseToPerson(Person person, Course course, String dateFrom, String dateTo) {
         LocalDate localDateFrom = LocalDate.parse(dateFrom);

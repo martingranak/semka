@@ -13,11 +13,76 @@
         SELECT ride_id, identity_number, car_id, datetime_from, datetime_to FROM ride_obj
     </select>
 
+    <select id="findAllByPageById" resultMap="RideResultMap">
+        SELECT
+          ride_id, identity_number, car_id, datetime_from, datetime_to
+        FROM
+          ride_obj
+        ORDER BY
+          ride_id
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
+    <select id="findAllByPageByIdentityNumber" resultMap="RideResultMap">
+        SELECT
+          ride_id, identity_number, car_id, datetime_from, datetime_to
+        FROM
+          ride_obj
+        ORDER BY
+          identity_number
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
+    <select id="findAllByPageByCarId" resultMap="RideResultMap">
+        SELECT
+          ride_id, identity_number, car_id, datetime_from, datetime_to
+        FROM
+          ride_obj
+        ORDER BY
+          car_id
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
+    <select id="findAllByPageByDateFrom" resultMap="RideResultMap">
+        SELECT
+          ride_id, identity_number, car_id, datetime_from, datetime_to
+        FROM
+          ride_obj
+        ORDER BY
+          datetime_from
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
+    <select id="findAllByPageByDateTo" resultMap="RideResultMap">
+        SELECT
+          ride_id, identity_number, car_id, datetime_from, datetime_to
+        FROM
+          ride_obj
+        ORDER BY
+          datetime_to
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
     <select id="findById" parameterType="java.lang.Long"  resultMap="RideResultMap">
         SELECT ride_id, identity_number, car_id, datetime_from, datetime_to FROM ride_obj WHERE ride_id = #{rideId}
     </select>
 
-    <select id="findByDriver" parameterType="java.lang.Long"  resultMap="RideResultMap">
+    <select id="findByPerson" parameterType="java.lang.Long"  resultMap="RideResultMap">
         SELECT ride_id, identity_number, car_id, datetime_from, datetime_to FROM ride_obj WHERE identity_number = #{identityNumber}
     </select>
 

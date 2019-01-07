@@ -45,21 +45,76 @@
         SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(last_name) = UPPER(#{lastName})
     </select>
 
-    <select id="findAllDrivers" resultMap="PersonCourseResultMap">
+    <select id="findAllDrivers" resultMap="PersonResultMap">
       SELECT
-        pc.person_course_id person_course_id,
         p.identity_number identity_number,
         p.first_name first_name,
         p.last_name last_name,
-        p.birthday birthday,
-        c.course_id course_id,
-        c.course_name course_name,
-        c.course_type course_type,
-        pc.date_from date_from,
-        pc.date_to date_to
-      FROM person_course AS pc
-      JOIN person p on pc.identity_number = p.identity_number
-      JOIN course c on pc.course_id = c.course_id
+        p.birthday birthday
+      FROM
+        person p
+      WHERE
+        p.identity_number IN (SELECT pc2.identity_number FROM person_course pc2 WHERE pc2.course_id = 1 AND pc2.date_to >= current_date)
+          AND
+        p.identity_number IN (SELECT pc2.identity_number FROM person_course pc2 WHERE pc2.course_id = 6 AND pc2.date_to >= current_date)
+      ORDER BY p.identity_number
+    </select>
+
+    <select id="findAllDriversPageById" resultMap="PersonResultMap">
+        SELECT
+        p.identity_number identity_number,
+        p.first_name first_name,
+        p.last_name last_name,
+        p.birthday birthday
+      FROM
+        person p
+      WHERE
+        p.identity_number IN (SELECT pc2.identity_number FROM person_course pc2 WHERE pc2.course_id = 1 AND pc2.date_to >= current_date)
+          AND
+        p.identity_number IN (SELECT pc2.identity_number FROM person_course pc2 WHERE pc2.course_id = 6 AND pc2.date_to >= current_date)
+      ORDER BY p.identity_number
+      LIMIT
+        #{limit}
+      OFFSET
+        #{offset}
+    </select>
+
+    <select id="findAllDriversPageByName" resultMap="PersonResultMap">
+        SELECT
+        p.identity_number identity_number,
+        p.first_name first_name,
+        p.last_name last_name,
+        p.birthday birthday
+      FROM
+        person p
+      WHERE
+        p.identity_number IN (SELECT pc2.identity_number FROM person_course pc2 WHERE pc2.course_id = 1 AND pc2.date_to >= current_date)
+          AND
+        p.identity_number IN (SELECT pc2.identity_number FROM person_course pc2 WHERE pc2.course_id = 6 AND pc2.date_to >= current_date)
+      ORDER BY p.last_name || p.first_name, p.identity_number
+      LIMIT
+        #{limit}
+      OFFSET
+        #{offset}
+    </select>
+
+    <select id="findAllDriversPageByBirthdate" resultMap="PersonResultMap">
+      SELECT
+        p.identity_number identity_number,
+        p.first_name first_name,
+        p.last_name last_name,
+        p.birthday birthday
+      FROM
+        person p
+      WHERE
+        p.identity_number IN (SELECT pc2.identity_number FROM person_course pc2 WHERE pc2.course_id = 1 AND pc2.date_to >= current_date)
+          AND
+        p.identity_number IN (SELECT pc2.identity_number FROM person_course pc2 WHERE pc2.course_id = 6 AND pc2.date_to >= current_date)
+      ORDER BY p.birthday, p.identity_number
+      LIMIT
+        #{limit}
+      OFFSET
+        #{offset}
     </select>
 
     <insert id="insertPerson" parameterType="sk.pds.semestralka.model.Person">

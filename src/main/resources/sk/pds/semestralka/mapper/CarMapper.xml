@@ -117,6 +117,86 @@
         WHERE upper(car.fuel) like upper(#{carFuelType})
     </select>
 
+    <select id="findAllPage" resultMap="CarResultMap">
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+        ORDER BY
+          car.car_id
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
+    <select id="findAllPageByName" resultType="sk.pds.semestralka.model.Car">
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+        ORDER BY
+          car.name, car.type, car.fuel, car.car_id
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
+    <select id="findAllPageByType" resultType="sk.pds.semestralka.model.Car">
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+        ORDER BY
+          car.type, car.name, car.fuel, car.car_id
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
+    <select id="findAllPageByFuelType" resultType="sk.pds.semestralka.model.Car">
+        SELECT
+          car.car_id car_id,
+          car.name car_name,
+          car.type car_type,
+          car.fuel fuel,
+          car.consumption consumption,
+          cp.picture picture
+        FROM
+          car
+        JOIN
+          car_picture cp on car.picture_id = cp.picture_id
+        ORDER BY
+          car.fuel, car.name, car.type, car.car_id
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
+    </select>
+
     <insert id="insertCar" parameterType="sk.pds.semestralka.model.Car">
         INSERT INTO car (name, type, fuel, consumption, picture_id) VALUES (#{car.name}, #{car.type}, #{car.fuel}, #{car.consumption}, #{car.pictureId})
     </insert>

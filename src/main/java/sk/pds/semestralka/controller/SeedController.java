@@ -36,16 +36,16 @@ public class SeedController {
     private RideService rideService;
 
     @RequestMapping(value = "/seed", method = RequestMethod.GET)
-    public void removePerson() {
-        List<Person> persons = this.personService.findAll();
+    public void seed() {
+        /*List<Person> persons = this.personService.findAll();
         List<Course> courses = this.courseService.findAll();
         for (Person person : persons) {
-            int courseNum = ThreadLocalRandom.current().nextInt(1, courses.size());
+            int courseNum = ThreadLocalRandom.current().nextInt(1, courses.size()+1);
             int[] cisla = new int[courseNum];
             for (int i = 0; i < courseNum; i++) {
                 int index;
                 while (true) {
-                    index = ThreadLocalRandom.current().nextInt(0, courseNum);
+                    index = ThreadLocalRandom.current().nextInt(0, courses.size());
                     boolean obsahuje = false;
                     for (int indexes : cisla) {
                         if (indexes == index + 1) {
@@ -186,11 +186,11 @@ public class SeedController {
         for (Ride ride : rides) {
             LocalDateTime rideTime = ride.getDatetimeFrom();
             LocalDateTime now = LocalDateTime.now();
-            LocalDateTime locationTime = rideTime.plusMinutes(3);
+            LocalDateTime locationTime = rideTime.plusMinutes(5);
             double latitude = 49.202076;
             double longitude = 18.761506;
             while (locationTime.isBefore(now) && locationTime.isBefore(ride.getDatetimeTo())) {
-                double value = ThreadLocalRandom.current().nextDouble(0.0, 0.3);
+                double value = ThreadLocalRandom.current().nextDouble(0.0, 0.5);
                 boolean more = ThreadLocalRandom.current().nextBoolean();
                 if (more) {
                     latitude += value;
@@ -204,8 +204,8 @@ public class SeedController {
                     longitude -= 0.3-value;
                 }
                 this.locationService.addLocation(ride.getId(), latitude, longitude, locationTime.toString());
-                locationTime = locationTime.plusMinutes(1);
+                locationTime = locationTime.plusMinutes(5);
             }
-        }
+        }*/
     }
 }
