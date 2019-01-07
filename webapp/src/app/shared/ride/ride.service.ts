@@ -12,7 +12,7 @@ export class RideService {
     return this.http.get('//localhost:8080/ride/all');
   }
 
-  getOne(rideId: string): Observable<any> {
+  getOne(rideId: any): Observable<any> {
     return this.http.post('//localhost:8080/ride/one', null, {
       params: {
         'rideId': rideId

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; 
 import { CarService } from '../../../shared/car/car.service';
+import { RideService } from '../../../shared/ride/ride.service';
 import { Car } from '../../../models/car'
-
+import { Router } from '@angular/router'; 
 @Component({
   selector: 'app-car-view',
   templateUrl: './car-view.component.html',
@@ -11,9 +12,10 @@ import { Car } from '../../../models/car'
 export class CarViewComponent implements OnInit {
 
   car: Car;
+  rides: Array<any>;
   update: Boolean = false;
 
-  constructor(private route: ActivatedRoute, private carService: CarService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private carService: CarService, private rideService: RideService) { }
 
   
   ngOnInit() {
@@ -29,6 +31,14 @@ export class CarViewComponent implements OnInit {
     this.carService.getOne(id).subscribe(data => {
       this.car = data;
     });
+
+    this.rideService.getAllByCar(id).subscribe(data => {
+      this.rides = data;
+    });    
+  }
+
+  onSelect(ride: any): void {
+    this.router.navigate(['/tracking', ride.id]);
   }
 
   onSubmit(): void {

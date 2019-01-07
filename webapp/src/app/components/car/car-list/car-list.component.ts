@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CarListComponent implements OnInit {
   cars: Car[];
-
+  page: number = 1;
   selectedCar: Car;
 
   constructor(private carService: CarService, private router: Router) { }
@@ -23,9 +23,21 @@ export class CarListComponent implements OnInit {
   }
 
   getCars(): void {
-    this.carService.getAll().subscribe(data => {
+    this.carService.getAllPaginated(this.page).subscribe(data => {
       this.cars = data;
     });
+  }
+
+  decreasePage(): void {
+    if(this.page != 1){
+      this.page -= 1;
+      this.getCars();
+    }
+  }
+
+  increasePage(): void {
+      this.page += 1;
+      this.getCars();
   }
 
   deleteCar(car: Car): void {

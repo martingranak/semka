@@ -59,6 +59,24 @@
 
     <a (click)="onSubmit()" class="btn btn-success">Submit</a>
 </div>
+
+<h1> Rides of car</h1>
+<table class="table" *ngIf="rides">
+    <tr>
+      <th>id</th>
+      <th>date start</th> 
+      <th>date end</th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let ride of rides">
+      <td>{{ ride.id }}</td>
+      <td>{{ ride.datetimeFrom | date:'yyyy-MM-dd HH:mm' }}</td>
+      <td>{{ ride.datetimeTo | date:'yyyy-MM-dd HH:mm'}}</td>
+      <td>
+        <a class="btn btn btn-success pull-right" (click)="onSelect(ride)">Detail</a>
+      </td>
+    </tr>
+  </table>
       
 
 

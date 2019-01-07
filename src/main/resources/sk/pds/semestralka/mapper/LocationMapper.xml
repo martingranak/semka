@@ -17,7 +17,7 @@
     </select>
 
     <select id="findByRide" resultMap="LocationResultMap" parameterType="java.lang.Long">
-        SELECT coordinates_id, ride_id, value(coordinates).latitude latitude, value(coordinates).longitude longitude, time FROM location WHERE ride_id = #{rideId}
+        SELECT ride_id, ((coordinates).latitude, (coordinates).longitute) coordinates, time FROM location WHERE ride_id = #{rideId}
     </select>
 
     <insert id="insertLocation" parameterType="sk.pds.semestralka.model.Location">
