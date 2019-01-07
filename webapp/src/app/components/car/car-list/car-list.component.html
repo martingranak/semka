@@ -17,11 +17,19 @@
     <td>{{ car.type }}</td>
     <td>{{ car.fuel }}</td>
     <td>{{ car.consumption }}</td>
-    <td><img src="data:image/png;base64,{{car.picture}}" alt="" width="400px" /></td>
+    <td><img class="img" src="data:image/png;base64,{{car.picture}}" alt="" /></td>
     <td>
       <a class="btn btn btn-success pull-right" (click)="onSelect(car)">Detail</a>
       <a class="btn btn btn-danger pull-right" (click)="deleteCar(car)">Delete</a>
     </td>
   </tr>
 </table>
+
+<div class="center">
+
+  <a class="btn btn btn-success" (click)="decreasePage()"><</a>
+  <a class="btn btn btn-success">{{ page }}</a>
+  <a class="btn btn btn-success" (click)="increasePage()">></a>
+</div>
+
 

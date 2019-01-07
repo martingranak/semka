@@ -12,6 +12,11 @@ export class CarService {
     return this.http.get('//localhost:8080/car/all');
   }
 
+  getAllPaginated(id: any): Observable<any> {
+    return this.http.get('//localhost:8080/car/all/' + id);
+
+  }
+
   getOne(carId: string): Observable<any> {
     return this.http.post('//localhost:8080/car/one', null, {
       params: {
@@ -19,6 +24,8 @@ export class CarService {
       }
     });
   }
+
+  
 
   getAllByName(carName: string): Observable<any> {
     return this.http.get('//localhost:8080/car/name/' + carName);

@@ -8,7 +8,8 @@ import sk.pds.semestralka.service.LocationService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/coordinates")
+@RequestMapping("/location")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LocationController {
     @Autowired
     private LocationService locationService;
@@ -18,13 +19,13 @@ public class LocationController {
         return this.locationService.findAll();
     }
 
-    @RequestMapping(value = "/one", method = RequestMethod.POST)
+    @RequestMapping(value = "/one", method = RequestMethod.GET)
     public Location findById(@RequestParam("locationId") long locationId) {
         return this.locationService.findById(locationId);
     }
 
-    @RequestMapping(value = "/ride", method = RequestMethod.POST)
-    public List<Location> findByRide(@RequestParam("rideId") long rideId) {
+    @RequestMapping(value = "/ride/{rideId}", method = RequestMethod.GET)
+    public List<Location> findByRide(@PathVariable("rideId") long rideId) {
         return this.locationService.findByRide(rideId);
     }
 

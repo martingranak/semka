@@ -22,7 +22,7 @@ const routes: Routes = [
     component: CarViewComponent
   },
   {
-    path: 'tracking',
+    path: 'tracking/:id',
     component: TrackingComponent
   },
   {
