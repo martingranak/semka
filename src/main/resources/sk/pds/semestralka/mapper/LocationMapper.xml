@@ -4,20 +4,21 @@
     <resultMap id="LocationResultMap" type="sk.pds.semestralka.model.Location">
         <id column="location_id" property="locationId" />
         <result column="ride_id" property="rideId" />
+        <result column="latitude" property="latitude" />
+        <result column="longitude" property="longitude" />
         <result column="time" property="time" />
-        <association property="coordinates" javaType="sk.pds.semestralka.model.Coordinates" />
     </resultMap>
 
     <select id="findAll" resultMap="LocationResultMap">
-        SELECT location_id, ride_id, value(coordinates).latitude latitude, value(coordinates).longitude longitude, time FROM location
+        SELECT location_id, ride_id, (coordinates).latitude latitude, (coordinates).longitute longitude, time FROM location
     </select>
 
     <select id="findById" resultMap="LocationResultMap" parameterType="java.lang.Long">
-        SELECT coordinates_id, ride_id, value(coordinates).latitude latitude, value(coordinates).longitude longitude, time FROM location WHERE location_id = #{locationId}
+        SELECT location_id, ride_id, (coordinates).latitude latitude, (coordinates).longitute longitude, time FROM location WHERE location_id = #{locationId}
     </select>
 
     <select id="findByRide" resultMap="LocationResultMap" parameterType="java.lang.Long">
-        SELECT ride_id, ((coordinates).latitude, (coordinates).longitute) coordinates, time FROM location WHERE ride_id = #{rideId}
+        SELECT location_id, ride_id, (coordinates).latitude latitude, (coordinates).longitute longitude, time FROM location WHERE ride_id = #{rideId}
     </select>
 
     <insert id="insertLocation" parameterType="sk.pds.semestralka.model.Location">

@@ -19,13 +19,13 @@ public class LocationController {
         return this.locationService.findAll();
     }
 
-    @RequestMapping(value = "/one", method = RequestMethod.GET)
+    @RequestMapping(value = "/one", method = RequestMethod.POST)
     public Location findById(@RequestParam("locationId") long locationId) {
         return this.locationService.findById(locationId);
     }
 
-    @RequestMapping(value = "/ride/{rideId}", method = RequestMethod.GET)
-    public List<Location> findByRide(@PathVariable("rideId") long rideId) {
+    @RequestMapping(value = "/ride", method = RequestMethod.POST)
+    public List<Location> findByRide(@RequestParam("rideId") long rideId) {
         return this.locationService.findByRide(rideId);
     }
 
