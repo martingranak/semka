@@ -103,8 +103,6 @@
             to_char(r.datetime_to::date, 'DD.MM.YYYY') date_to,
             r.datetime_from::time time_from,
             r.datetime_to::time time_to,
-            p.description description,
-            p.value valuee
           from
             ride_obj r, person per, payment p, car c
           where
@@ -114,7 +112,7 @@
             and r.datetime_to &lt; #{date}::date
             and r.datetime_to &gt; date_trunc('month', #{date}::date)
           order by
-            r.ride_id, p.description
+            r.ride_id
         ) as tab;
     </select>
 
