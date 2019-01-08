@@ -16,12 +16,12 @@ public class Car {
     public Car() {
     }
 
-    public Car(String name, String type, String fuel, double consumption, byte[] picture) {
+    public Car(String name, String type, String fuel, double consumption, String picture) {
         this.name = name;
         this.type = type;
         this.fuel = fuel;
         this.consumption = consumption;
-        this.picture = picture;
+        this.picture = picture.getBytes();
     }
 
     public Car(String name, String type, String fuel, double consumption, int pictureId) {

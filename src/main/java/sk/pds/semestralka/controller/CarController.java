@@ -62,7 +62,7 @@ public class CarController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public Car add(@RequestParam("carName") String carName, @RequestParam("carType") String carType,
                    @RequestParam("carFuelType") String carFuelType, @RequestParam("carConsumption") float carConsumption,
-                   @RequestParam("carPicture") int carPicture) {
+                   @RequestParam("carPicture") String carPicture) {
         return this.carService.addCar(carName, carType, carFuelType, carConsumption, carPicture);
     }
 

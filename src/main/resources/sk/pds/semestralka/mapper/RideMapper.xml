@@ -9,6 +9,17 @@
         <result column="datetime_to" property="datetimeTo" />
     </resultMap>
 
+    <resultMap id="ReservationResultMap" type="sk.pds.semestralka.model.Reservation" >
+        <id column="ride_id" property="rideId" />
+        <result column="time_from" property="timeFrom" />
+        <result column="time_to" property="timeTo" />
+        <result column="car_id" property="carId" />
+        <result column="car_name" property="carName" />
+        <result column="picture" property="picture" />
+        <result column="identity_number" property="identityNumber" />
+        <result column="name" property="name" />
+    </resultMap>
+
     <select id="findAll" resultMap="RideResultMap">
         SELECT ride_id, identity_number, car_id, datetime_from, datetime_to FROM ride_obj
     </select>
@@ -88,6 +99,54 @@
 
     <select id="findByCar" parameterType="java.lang.Long"  resultMap="RideResultMap">
         SELECT ride_id, identity_number, car_id, datetime_from, datetime_to FROM ride_obj WHERE car_id = #{carId}
+    </select>
+
+    <select id="findAllReservations" resultMap="ReservationResultMap">
+        SELECT
+          r.ride_id ride_id,
+          r.datetime_from datetime_from,
+          r.datetime_to datetime_to,
+          r.car_id car_id,
+          c.name car_name,
+          cp.picture picture,
+          r.identity_number identity_number,
+          p.last_name || ' ' || p.first_name as name
+        FROM
+          ride_obj r
+        JOIN
+          car c on r.car_id = c.car_id
+        JOIN
+          car_picture cp on c.picture_id = cp.picture_id
+        JOIN
+          person p on r.identity_number = p.identity_number
+        WHERE
+          r.datetime_from > now()
+    </select>
+
+    <select id="findAllPageReservations" resultMap="ReservationResultMap">
+        SELECT
+          r.ride_id ride_id,
+          r.datetime_from time_from,
+          r.datetime_to time_to,
+          r.car_id car_id,
+          c.name car_name,
+          cp.picture picture,
+          r.identity_number identity_number,
+          p.last_name || ' ' || p.first_name as name
+        FROM
+          ride_obj r
+        JOIN
+          car c on r.car_id = c.car_id
+        JOIN
+          car_picture cp on c.picture_id = cp.picture_id
+        JOIN
+          person p on r.identity_number = p.identity_number
+        WHERE
+          r.datetime_from > now()
+        LIMIT
+          #{limit}
+        OFFSET
+          #{offset}
     </select>
 
     <insert id="insertRide" parameterType="sk.pds.semestralka.model.Ride">

@@ -2,6 +2,7 @@ package sk.pds.semestralka.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import sk.pds.semestralka.model.Reservation;
 import sk.pds.semestralka.model.Ride;
 
 import java.util.HashMap;
@@ -21,4 +22,8 @@ public interface RideMapper {
     void insertRide(@Param("ride") Ride ride);
     void updateRide(@Param("ride") Ride ride);
     void deleteRide(@Param("rideId") long rideId);
+
+    List<Reservation> findAllReservations();
+
+    List<Reservation> findAllPageReservations(@Param("limit") int limit, @Param("offset") int offset);
 }

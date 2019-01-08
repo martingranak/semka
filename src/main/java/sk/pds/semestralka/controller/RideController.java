@@ -2,6 +2,7 @@ package sk.pds.semestralka.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sk.pds.semestralka.model.Reservation;
 import sk.pds.semestralka.model.Ride;
 import sk.pds.semestralka.service.RideService;
 
@@ -17,6 +18,16 @@ public class RideController {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<Ride> findAllRides() {
         return this.rideService.findAllRides();
+    }
+
+    @RequestMapping(value = "/reservations", method = RequestMethod.GET)
+    public List<Reservation> findAllReservations() {
+        return this.rideService.findAllReservations();
+    }
+
+    @RequestMapping(value = "/reservations/{page}", method = RequestMethod.GET)
+    public List<Reservation> findAllPageReservations(@PathVariable("page") int page) {
+        return this.rideService.findAllPageReservations(page, 20);
     }
 
     @RequestMapping(value = "/one", method = RequestMethod.POST)

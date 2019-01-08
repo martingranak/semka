@@ -3,6 +3,7 @@ package sk.pds.semestralka.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.pds.semestralka.mapper.RideMapper;
+import sk.pds.semestralka.model.Reservation;
 import sk.pds.semestralka.model.Ride;
 
 import javax.transaction.Transactional;
@@ -74,5 +75,13 @@ public class RideService {
     @Transactional
     public void removeRide(long rideId) {
         this.rideMapper.deleteRide(rideId);
+    }
+
+    public List<Reservation> findAllReservations() {
+        return this.rideMapper.findAllReservations();
+    }
+
+    public List<Reservation> findAllPageReservations(int page, int count) {
+        return this.rideMapper.findAllPageReservations(count, (page - 1) * count);
     }
 }

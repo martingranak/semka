@@ -198,7 +198,11 @@
     </select>
 
     <insert id="insertCar" parameterType="sk.pds.semestralka.model.Car">
-        INSERT INTO car (name, type, fuel, consumption, picture_id) VALUES (#{car.name}, #{car.type}, #{car.fuel}, #{car.consumption}, #{car.pictureId})
+        WITH picture_insert AS (
+          INSERT INTO car_picture (name, subname, type, color, picture) VALUES (#{car.name}, '', #{car.type}, '', #{car.picture})
+          RETURNING picture_id AS new_picture_id
+        )
+        INSERT INTO car (name, type, fuel, consumption, picture_id) VALUES (#{car.name}, #{car.type}, #{car.fuel}, #{car.consumption}, new_picture_id)
     </insert>
 
     <update id="updateCar" parameterType="sk.pds.semestralka.model.Car">
