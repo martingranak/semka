@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.pds.semestralka.mapper.PaymentMapper;
 import sk.pds.semestralka.model.Payment;
+import sk.pds.semestralka.model.PaymentReport;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,6 +29,27 @@ public class PaymentService {
 
     public List<Payment> findByDescription(String description) {
         return this.paymentMapper.findByDescription(description);
+    }
+
+    public List<PaymentReport> findSumByRide(long rideId) {
+        return this.paymentMapper.findSumByRide(rideId);
+    }
+
+    public List<PaymentReport> findSumByRideDetail(long rideId) {
+        return this.paymentMapper.findSumByRideDetail(rideId);
+    }
+
+    public List<PaymentReport> findSumByDescription(String description) {
+        return this.paymentMapper.findSumByDescription(description);
+    }
+
+    public List<PaymentReport> findSumByDescriptionDetail(String description) {
+        return this.paymentMapper.findSumByDescriptionDetail(description);
+    }
+
+    public String findPaymentsOfMonthByDay(String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        return this.paymentMapper.findPaymentsOfMonthByDay(date);
     }
 
     @Transactional

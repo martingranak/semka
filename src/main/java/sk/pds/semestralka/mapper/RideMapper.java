@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import sk.pds.semestralka.model.Ride;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper

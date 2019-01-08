@@ -199,9 +199,9 @@ public class SeedController {
                 }
                 more = ThreadLocalRandom.current().nextBoolean();
                 if (more) {
-                    longitude += 0.3-value;
+                    longitude += 0.5-value;
                 } else  {
-                    longitude -= 0.3-value;
+                    longitude -= 0.5-value;
                 }
                 this.locationService.addLocation(ride.getId(), latitude, longitude, locationTime.toString());
                 locationTime = locationTime.plusMinutes(5);
