@@ -12,6 +12,9 @@ export class PaymentService {
     return this.http.get('//localhost:8080/payment/all');
   }
 
+  getReport(date: string): Observable<any> {
+    return this.http.get('//localhost:8080/payment/report/month/' + date);
+  }
   getOne(paymentId: string): Observable<any> {
     return this.http.post('//localhost:8080/payment/one', null, {
       params: {

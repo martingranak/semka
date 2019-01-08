@@ -1,3 +1,12 @@
-<agm-map >
-  
+<agm-map  [latitude]="lat" [longitude]="lon" *ngIf="lat && lon">
+    <agm-marker 
+      *ngFor="let location of locations"
+      [latitude]="location.latitude"
+      [longitude]="location.longitude">
+      
+    <agm-info-window>
+      <strong>{{ location.time | date:'yyyy-MM-dd HH:mm' }}</strong>
+    </agm-info-window>
+    
+  </agm-marker>
 </agm-map>

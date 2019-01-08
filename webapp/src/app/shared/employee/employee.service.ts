@@ -12,7 +12,11 @@ export class EmployeeService {
     return this.http.get('//localhost:8080/person/all');
   }
 
-  getOne(identityNumber: string): Observable<any> {
+  getAllPaginated(id: any): Observable<any> {
+    return this.http.get('//localhost:8080/person/drivers/id/' + id);
+  }
+
+  getOne(identityNumber: any): Observable<any> {
     return this.http.post('//localhost:8080/person/one', null, {
       params: {
         'identityNumber': identityNumber

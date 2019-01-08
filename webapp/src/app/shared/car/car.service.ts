@@ -14,7 +14,6 @@ export class CarService {
 
   getAllPaginated(id: any): Observable<any> {
     return this.http.get('//localhost:8080/car/all/' + id);
-
   }
 
   getOne(carId: string): Observable<any> {
