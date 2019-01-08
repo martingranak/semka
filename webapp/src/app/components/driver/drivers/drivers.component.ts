@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class DriversComponent implements OnInit {
   drivers: Driver[];
-
+  page: number = 1;
   selctedDriver: Driver;
   
   constructor(private employeeService: EmployeeService, private router: Router) { }
@@ -18,14 +18,26 @@ export class DriversComponent implements OnInit {
     this.getDrivers();
   }
 
-  onSelect(driver: Driver): void {
-    this.router.navigate(['/driver-view', driver.id]);
+  onSelect(driver: any): void {
+    this.router.navigate(['/driver-view', driver]);
   }
 
   getDrivers(): void {
-    this.employeeService.getAll().subscribe(data => {
+    this.employeeService.getAllPaginated(this.page).subscribe(data => {
       this.drivers = data;
     });
+  }
+
+  decreasePage(): void {
+    if(this.page != 1){
+      this.page -= 1;
+      this.getDrivers();
+    }
+  }
+
+  increasePage(): void {
+      this.page += 1;
+      this.getDrivers();
   }
 
   deleteDriver(id: any): void {

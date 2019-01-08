@@ -14,8 +14,15 @@
     <td>{{ driver.firstName }}</td>
     <td>{{ driver.lastName }}</td>
     <td>{{ driver.birthday }}</td><td>
-      <a class="btn btn btn-success pull-right" (click)="onSelect(driver)">Detail</a>
+      <a class="btn btn btn-success pull-right" (click)="onSelect(driver.identityNumber)">Detail</a>
       <a class="btn btn btn-danger pull-right" (click)="deleteDriver(driver.identityNumber)">Delete</a>
     </td>
   </tr>
 </table>
+
+<div class="center">
+
+  <a class="btn btn btn-success" (click)="decreasePage()"><</a>
+  <a class="btn btn btn-success">{{ page }}</a>
+  <a class="btn btn btn-success" (click)="increasePage()">></a>
+</div>

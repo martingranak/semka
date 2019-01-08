@@ -1,21 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
-import { StatisticDataSource } from './statistic-datasource';
-
+import { HttpClient } from '@angular/common/http';
+import { PaymentService } from './../../shared/payment/payment.service'
 @Component({
   selector: 'app-statistic',
   templateUrl: './statistic.component.html',
   styleUrls: ['./statistic.component.css']
 })
 export class StatisticComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  dataSource: StatisticDataSource;
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  constructor() { }
 
-  ngOnInit() {
-    this.dataSource = new StatisticDataSource(this.paginator, this.sort);
+  ngOnInit() {;
   }
+
 }

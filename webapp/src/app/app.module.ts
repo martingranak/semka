@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CarService } from './shared/car/car.service';
 import { RideService } from './shared/ride/ride.service';
 import { LocationService } from './shared/location/location.service';
+import { PaymentService } from './shared/payment/payment.service';
 import { EmployeeService } from './shared/employee/employee.service';
 import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule, MatTableModule, MatPaginatorModule, MatSortModule, MatSidenavModule, MatIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,7 +51,7 @@ import { Location } from '@angular/common';
     MatSidenavModule,
     MatIconModule
   ],
-  providers: [CarService, EmployeeService, RideService, LocationService],
+  providers: [CarService, EmployeeService, RideService, LocationService, PaymentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

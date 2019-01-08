@@ -23,3 +23,9 @@
     margin: 5px;
     float: right;
 }
+
+.center {
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}

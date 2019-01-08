@@ -29,20 +29,20 @@
         SELECT identity_number, first_name, last_name, birthday FROM person
     </select>
 
-    <select id="findById" resultMap="PersonResultMap" parameterType="java.lang.String">
-        SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(identity_number) = UPPER(#{identityNumber})
+    <select id="findById" resultMap="PersonResultMap">
+        SELECT identity_number, first_name, last_name, birthday FROM person WHERE identity_number = #{identityNumber}
     </select>
 
     <select id="findByName" resultMap="PersonResultMap" parameterType="java.lang.String">
-        SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(first_name || ' ' || last_name) = UPPER(#{name})
+        SELECT identity_number, first_name, last_name, birthday FROM person WHERE first_name || ' ' || last_name = #{name}
     </select>
 
     <select id="findByFirstName" resultMap="PersonResultMap" parameterType="java.lang.String">
-        SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(first_name) = UPPER(#{firstName})
+        SELECT identity_number, first_name, last_name, birthday FROM person WHERE first_name = #{firstName}
     </select>
 
     <select id="findByLastName" resultMap="PersonResultMap" parameterType="java.lang.String">
-        SELECT identity_number, first_name, last_name, birthday FROM person WHERE UPPER(last_name) = UPPER(#{lastName})
+        SELECT identity_number, first_name, last_name, birthday FROM person WHERE last_name = #{lastName}
     </select>
 
     <select id="findAllDrivers" resultMap="PersonResultMap">

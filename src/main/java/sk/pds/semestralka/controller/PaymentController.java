@@ -9,6 +9,7 @@ import sk.pds.semestralka.service.PaymentService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/payment")
 public class PaymentController {
     @Autowired

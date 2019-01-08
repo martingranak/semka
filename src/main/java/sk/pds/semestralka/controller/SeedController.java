@@ -37,7 +37,7 @@ public class SeedController {
 
     @RequestMapping(value = "/seed", method = RequestMethod.GET)
     public void seed() {
-        /*List<Person> persons = this.personService.findAll();
+        List<Person> persons = this.personService.findAll();
         List<Course> courses = this.courseService.findAll();
         for (Person person : persons) {
             int courseNum = ThreadLocalRandom.current().nextInt(1, courses.size()+1);
@@ -67,7 +67,7 @@ public class SeedController {
                 }
             }
         }
-
+    /*
         for (int i = 0; i < 5000; i ++) {
             int car = ThreadLocalRandom.current().nextInt(1, 61);
             CarPicture carPicture = this.carService.findCarPictureById(car);

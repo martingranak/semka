@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface PersonMapper {
     List<Person> findAll();
-    Person findById(@Param("identityNumber") String identityNumber);
+    Person findById(@Param("identityNumber") long identityNumber);
     List<Person> findByName(@Param("name") String name);
     List<Person> findByFirstName(@Param("firstName") String firstName);
     List<Person> findByLastName(@Param("lastName") String lastName);

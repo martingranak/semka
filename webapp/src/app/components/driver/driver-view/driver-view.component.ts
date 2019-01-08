@@ -28,7 +28,6 @@ export class DriverViewComponent implements OnInit {
   getDriver(id:any): void {
     this.employeeService.getOne(id).subscribe(data => {
       this.driver = data;
-      console.log(this.driver);
     });
   }
 

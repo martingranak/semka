@@ -21,7 +21,7 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/one", method = RequestMethod.POST)
-    public Person findById(@RequestParam("identityNumber") String identityNumber) {
+    public Person findById(@RequestParam("identityNumber") long identityNumber) {
         return this.personService.findById(identityNumber);
     }
 

@@ -21,7 +21,7 @@ public class PersonService {
         return this.personMapper.findAll();
     }
 
-    public Person findById(String identityNumber) {
+    public Person findById(long identityNumber) {
         return this.personMapper.findById(identityNumber);
     }
 
