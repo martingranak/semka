@@ -8,6 +8,13 @@
         <result column="description" property="description"/>
     </resultMap>
 
+    <resultMap id="PaymentReportResultMap" type="sk.pds.semestralka.model.PaymentReport" >
+        <id column="payment_id" property="paymentId" />
+        <result column="value" property="value" />
+        <result column="count" property="count" />
+        <result column="description" property="description" />
+    </resultMap>
+
     <select id="findAll" resultMap="PaymentResultMap">
         SELECT payment_id, ride_id, value, description FROM payment
     </select>
@@ -21,6 +28,94 @@
     </select>
     <select id="findByDescription" resultMap="PaymentResultMap">
         SELECT payment_id, ride_id, value, description FROM payment WHERE UPPER(description) = UPPER(#{description})
+    </select>
+
+    <select id="findSumByRide" resultMap="PaymentReportResultMap">
+      select ride_id, 'all' description, SUM(value), count(*) from payment WHERE ride_id = #{rideId} group by ride_id;
+    </select>
+
+    <select id="findSumByDescription" resultMap="PaymentReportResultMap">
+      select description, SUM(value), count(*) from payment WHERE description = #{description} group by description;
+    </select>
+
+    <select id="findSumByRideDetail" resultMap="PaymentReportResultMap">
+      select ride_id, description,  SUM(value), count(*) from payment WHERE ride_id = #{rideId} group by ride_id, description;
+    </select>
+
+    <select id="findSumByDescriptionDetail" resultMap="PaymentReportResultMap">
+      select description, ride_id, SUM(value), count(*) from payment WHERE description = #{description} group by description, ride_id;
+    </select>
+
+    <select id="findPaymentsOfMonthByDay" resultType="java.lang.String">
+      select
+        xmlroot(
+          xmlelement(name rides, null,
+            xmlagg(
+              xmlelement(name ride, xmlattributes (tab.ride_id AS ride_id),
+                xmlforest(
+                  tab.date_from AS date_from,
+                  tab.date_to AS date_to,
+                  tab.time_from AS time_from,
+                  tab.time_to AS time_to
+                ),
+                xmlelement(name car, xmlattributes (tab.car_id AS car_id),
+                  xmlforest(
+                    tab.date_from AS date_from,
+                    tab.date_to AS date_to,
+                    tab.time_from AS time_from,
+                    tab.time_to AS time_to
+                  )
+                ),
+                xmlelement(name person, xmlattributes (tab.identity_number AS person_id),
+                  xmlforest(
+                    tab.name AS person_name
+                  )
+                ),
+                xmlelement(name payments, null,
+                (
+                  select
+                    xmlagg(
+                      xmlelement(name payment, xmlattributes (payment_id AS payment_id),
+                        xmlforest(description AS description, value AS value)
+                      )
+                    )
+                  from
+                    payment
+                  where
+                    ride_id = tab.ride_id)
+                )
+              )
+            )
+          ), version '1.0', standalone yes
+        )
+      FROM
+        (
+          select
+            r.ride_id ride_id,
+            c.car_id car_id,
+            c.name car_name,
+            c.type car_type,
+            c.fuel car_fuel,
+            c.consumption car_consumption,
+            per.identity_number identity_number,
+            per.last_name || ' ' || per.first_name as name,
+            to_char(r.datetime_from::date, 'DD.MM.YYYY') date_from,
+            to_char(r.datetime_to::date, 'DD.MM.YYYY') date_to,
+            r.datetime_from::time time_from,
+            r.datetime_to::time time_to,
+            p.description description,
+            p.value valuee
+          from
+            ride_obj r, person per, payment p, car c
+          where
+            r.identity_number = per.identity_number
+            and r.ride_id = p.ride_id
+            and r.car_id = c.car_id
+            and r.datetime_to &lt; #{date}::date
+            and r.datetime_to &gt; date_trunc('month', #{date}::date)
+          order by
+            r.ride_id, p.description
+        ) as tab;
     </select>
 
     <insert id="insertPayment" parameterType="sk.pds.semestralka.model.Payment">
