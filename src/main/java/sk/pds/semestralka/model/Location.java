@@ -1,32 +1,23 @@
 package sk.pds.semestralka.model;
 
-import org.hibernate.annotations.Type;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Location {
     private long locationId;
     private long rideId;
-    private Coordinates coordinates;
+    private double latitude;
+    private double longitude;
     private LocalDateTime time;
 
     public Location() {
     }
 
-    public Location(long rideId, Coordinates coordinates, LocalDateTime time) {
+    public Location(long rideId, double latitude, double longitude, LocalDateTime time) {
         this.rideId = rideId;
-        this.coordinates = coordinates;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.time = time;
-    }
-
-    public long getId() {
-        return locationId;
-    }
-
-    public void setId(long locationId) {
-        this.locationId = locationId;
     }
 
     public long getRideId() {
@@ -37,12 +28,28 @@ public class Location {
         this.rideId = rideId;
     }
 
-    public Coordinates getCoordinates() {
-        return coordinates;
+    public long getLocationId() {
+        return locationId;
     }
 
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
+    public void setLocationId(long locationId) {
+        this.locationId = locationId;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public LocalDateTime getTime() {
@@ -56,17 +63,19 @@ public class Location {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Location)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         Location location = (Location) o;
         return locationId == location.locationId &&
-                getRideId() == location.getRideId() &&
-                getCoordinates().equals(location.getCoordinates()) &&
-                getTime().equals(location.getTime());
+                rideId == location.rideId &&
+                Double.compare(location.latitude, latitude) == 0 &&
+                Double.compare(location.longitude, longitude) == 0 &&
+                Objects.equals(time, location.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(locationId, getRideId(), getCoordinates(), getTime());
+
+        return Objects.hash(locationId, rideId, latitude, longitude, time);
     }
 
     @Override
@@ -74,7 +83,8 @@ public class Location {
         return "Location{" +
                 "locationId=" + locationId +
                 ", rideId=" + rideId +
-                ", coordinates=" + coordinates +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
                 ", time=" + time +
                 '}';
     }
