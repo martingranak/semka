@@ -21,7 +21,7 @@ export class LocationService {
   }
 
   getAllByRide(rideId: string): Observable<any> {
-    return this.http.post('//localhost:8080/location/ride/', null, {
+    return this.http.post('//localhost:8080/location/ride', null, {
       params: {
         'rideId': rideId
       }

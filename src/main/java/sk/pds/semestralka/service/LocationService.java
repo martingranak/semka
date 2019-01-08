@@ -3,7 +3,6 @@ package sk.pds.semestralka.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sk.pds.semestralka.mapper.LocationMapper;
-import sk.pds.semestralka.model.Coordinates;
 import sk.pds.semestralka.model.Location;
 
 import javax.transaction.Transactional;
@@ -30,7 +29,7 @@ public class LocationService {
     @Transactional
     public Location addLocation(long rideId, double latitude, double longtitude, String date) {
         LocalDateTime dateTime = LocalDateTime.parse(date);
-        Location location = new Location(rideId, new Coordinates(latitude, longtitude), dateTime);
+        Location location = new Location(rideId, latitude, longtitude, dateTime);
         this.locationMapper.insertLocation(location);
         return location;
     }

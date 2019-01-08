@@ -24,8 +24,8 @@ public class LocationController {
         return this.locationService.findById(locationId);
     }
 
-    @RequestMapping(value = "/ride/{rideId}", method = RequestMethod.GET)
-    public List<Location> findByRide(@PathVariable("rideId") long rideId) {
+    @RequestMapping(value = "/ride", method = RequestMethod.POST)
+    public List<Location> findByRide(@RequestParam("rideId") long rideId) {
         return this.locationService.findByRide(rideId);
     }
 
